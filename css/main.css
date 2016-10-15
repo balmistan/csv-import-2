@@ -1,0 +1,227 @@
+body{
+background: url('d356.gif') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 700px;
+}
+
+
+label,
+.label
+{ 
+    width:100%;
+    display: block;
+    font: 1em Arial,sans-serif;
+    margin-right: 5px;
+    text-align: left;
+    color: #666
+} 
+
+#container{
+    width:150%;
+    overflow-x: auto;
+}
+
+#div_radio_btn{
+    margin: 20px 0 20px 0;
+}
+
+#left-div{
+    width: auto;
+    float:left;
+    margin-bottom: 100px;
+
+}
+
+#central-div{
+    //text-align: center;
+   // margin: 0 auto;
+   // float:left;
+   // width:auto;
+    //max-width: 60%;
+    overflow: hidden;
+    margin-left:15px;
+    border:1px solid red;
+
+}
+
+#right-div{
+    width: auto;
+    float:left;
+    margin:0 10px 100px 20px;
+    padding-right: 30px;
+}
+
+#div-preview-table{
+    margin-bottom: 100px;
+    width:auto;
+    overflow: auto;
+}
+
+fieldset{
+    margin: 10px 0 25px;
+    width: auto;
+}
+
+input[name="otherseparator"]{
+    width: 2em;
+}
+
+
+#preview-table{
+    border-collapse: collapse;
+    width:100%;
+
+}
+
+#preview-table th, td{
+    padding:3px;
+    border: 1px dotted gray;
+}
+
+
+#div-preview-table table{
+    border-collapse: collapse;
+    overflow: auto;
+}
+
+#div-preview-table table thead{ 
+    background-color: #678564;
+    color: white;  
+}
+
+#configuration-table tfoot tr td{
+    text-align: left;
+    border: none !important;
+}
+
+#configuration-table thead tr td{
+      border: none !important;
+}
+
+
+#debug-div{
+    width:100%;
+    height:100px;
+    color:gray;
+    border: 2px solid white;
+    overflow:auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#wait-icon{
+    left: 50%;
+    top:50%;
+    display:none;
+    position: fixed;
+    opacity: 0.3;
+    z-index: 20000;
+}
+
+#fileuploader, button{
+    background: #00A0D1;
+    background: -moz-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#00A0D1),color-stop(100%,#008DB8));
+    background: -webkit-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+    background: -o-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+    background: -ms-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+    background: linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
+    padding:8px 20px;
+    color:#cfebf3;
+    font-family:'Helvetica Neue',sans-serif;
+    font-size:1em;
+    border-radius:40px;
+    -moz-border-radius:40px;
+    -webkit-border-radius:40px;
+    border:1px solid #095B7E;
+    text-align: center;
+    width: auto;
+    margin-top: 15px;
+    margin-right: 10px;
+
+}
+
+#fileuploader{
+    left:10px;
+}
+
+.ajax-file-upload-container{
+    display: none;
+}
+
+#uploaded-file-name{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.table-title{
+    color: gray;
+    font-weight: bold;
+    padding:10px;  
+}
+
+
+
+#configuration-table tr td{
+    border:none !important;
+    vertical-align: center;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 1.0em;
+}
+
+.csv-column[contenteditable = "true"]{
+    background-image: url("stylus.png");
+    background-position: right;
+    background-repeat: no-repeat;
+    padding-right: 20px;
+}
+
+
+#sidebar-wrapper{
+    margin-left: 100px;
+    overflow:visible;
+}
+#sidebar{
+    
+    overflow:hidden;
+    margin-top: -20px;
+}
+
+.dataTables_processing {
+z-index: 1000;
+}
+
+#info-msg{
+    position: fixed;
+    top:20px;
+    left: 35%;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    margin-top:-20px;
+}
+
+.dataTables_scrollBody{
+    background-color: white !important;
+}
+
+.dataTables_empty{
+    text-align: left !important;
+}
+
+#table-title fieldset{
+    width:100%;
+}
+
+#content fieldset{
+    margin-top: 15px;
+}
+
+#sidenotes{
+    margin-left: 40px;
+    margin-top:10px;
+}
+

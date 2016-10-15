@@ -1,0 +1,47 @@
+/*
+  ✰✰✰✰✰✰✰✰✰✰✰✰✰✰ 
+
+  Simple Login Form
+  HTML5/CSS3 Coded by: $hekh@r d-Ziner, CSSJunction.com
+  PSD by:PremiumPixels.com
+  
+  Uuage: Free. You can modify, remove our links and use wherever you want ☺.
+  
+  ✰✰✰✰✰✰✰✰✰✰✰✰✰✰✰ 
+  
+*/
+.box
+{
+
+    color:#444;
+    font:normal 12px/14px Arial, Helvetica, Sans-serif;
+    margin:0 auto 30px;
+    overflow:hidden;
+}
+
+.box.login
+{
+    height:auto;
+    width:auto;
+    position: absolute;
+    top:25%;
+    left:50%;
+    margin:-130px 0 0 -166px;
+}
+
+.box label
+{
+    display:block;
+    font:14px/22px Arial, Helvetica, Sans-serif;
+    margin:10px 0 0 6px;
+}
+
+
+.btnLogin
+{
+    font-weight: bold;
+    font-size: 1.2em; 
+    padding:10px;
+    width:100%;
+    margin-top:10px;
+}
