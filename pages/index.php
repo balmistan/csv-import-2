@@ -58,11 +58,11 @@ if (isset($post_var["username"])) {
                 <label for="dbname">DB Name</label>
                 <input type="text" name="dbname" id="dbname"/>
                 <label for="server">Server</label>
-                <input type="text" name="server" id="server"/>
+                <input type="text" name="server" id="server" value="localhost" />
                 <label for="port">Port</label>
-                <input type="text" name="port" id="port"/>       
+                <input type="text" name="port" id="port" value="3306" />       
                 <label for="username">Benutzername</label>
-                <input type="text" name="username" id="username"/>
+                <input type="text" name="username" id="username" value="root" />
                 <label for="password">Passwort</label>
                 <input type="Password" name="password" id="password"/>
             </fieldset>
