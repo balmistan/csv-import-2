@@ -27,11 +27,11 @@ class db {
 
     private function dbConnect() {
         /* Connect to an ODBC database using driver invocation */
-        $dsn = 'mysql:dbname=' . $this->dbname . ';host=' . $this->hostname . ';port=' . $this->port . ';charset=UTF8';
+        $dsn = 'mysql:host=' . $this->hostname . ';port=' . $this->port . ';charset=UTF8';
 
         try {
             $this->conn = new PDO($dsn, $this->user, $this->password, array(
-                PDO::ATTR_PERSISTENT => false
+                PDO::ATTR_PERSISTENT => true
             ));
 
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -185,6 +185,20 @@ class db {
         $statement->execute();
     }
 
-    
+    public function setDB($dbname) {
+        $dbname = addslashes($dbname);
+        try {
+            $this->conn->exec("USE " . $dbname);
+            $this->dbname = $dbname;
+            $issue = true;
+        } catch (PDOException $e) {
+            $issue = false;
+            $this->error = $e->getMessage();
+            if ($this->debug) {
+                echo 'ERROR: ' . $this->error;
+            }
+        }
+        return $issue;
+    }
 
 }
