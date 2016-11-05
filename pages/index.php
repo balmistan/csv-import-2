@@ -7,8 +7,8 @@
  */
 session_start();
 
-if(isset($_SESSION["islogged"])){
-    $_SESSION["islogged"] = false;
+if (isset($_SESSION["islogged"])) {
+    unset($_SESSION["islogged"]);
 }
 
 
@@ -33,16 +33,15 @@ if (isset($post_var["loginbtn"])) {
     $db = new db(false);    // true = active debug
 
     if ($db->isLogged() == NULL) {
-        $_SESSION["islogged"] = false;
         $err_msg = "Die Anmeldung am MySQL-Server ist fehlgeschlagen!";
         //$err_msg = $db->getError();
     } else {
-        if($db->setDB($post_var["dbname"])){
-        $_SESSION["islogged"] = true;
-        header("Location: main.php");
-        }else{
+        if ($db->setDB($post_var["dbname"])) {
+            $_SESSION["islogged"] = true;
+            header("Location: main.php");
+        } else {
             $err_msg = "Datenbank nicht gefunden!";
-          //  $err_msg = $err_msg = $db->getError();
+            //  $err_msg = $err_msg = $db->getError();
         }
     }
 }

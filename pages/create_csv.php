@@ -9,7 +9,7 @@ require_once 'debug.php';
 
 $db = new db();
 
-if (!$db->isLogged()) {
+if (!isset($_SESSION["islogged"])) {
     die();
 }
 

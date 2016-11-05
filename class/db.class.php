@@ -27,7 +27,7 @@ class db {
 
     private function dbConnect() {
         /* Connect to an ODBC database using driver invocation */
-        $dsn = 'mysql:host=' . $this->hostname . ';port=' . $this->port . ';charset=UTF8';
+        $dsn = 'mysql:host=' . $this->hostname . ';port=' . $this->port . ';charset=UTF8;dbname='.$this->dbname;
 
         try {
             $this->conn = new PDO($dsn, $this->user, $this->password, array(

@@ -10,13 +10,13 @@ session_start();
 require_once "../class/db.class.php";
 require_once "separator_list.php";
 
-$db = new db();
 
 
-if (!$db->isLogged()) {
+if (!isset($_SESSION["islogged"])) {
     header("Location: ../index.php");
     die();
 }
+
 
 if (!isset($_SESSION["info"])) {
     $_SESSION["info"] = array();
@@ -40,6 +40,8 @@ $dir = isset($_SESSION["info"]["dir"]) ? $_SESSION["info"]["dir"] : ''; //direct
 
 $autoconf = isset($_SESSION["info"]["autoconf"]) ? $_SESSION["info"]["autoconf"] : true; //checkbox autoconf
 
+
+$db = new db();
 
 $arr_table_names = $db->getTableNames();
 

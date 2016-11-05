@@ -10,9 +10,8 @@ session_start();
 
 require_once "../class/db.class.php";
 
-$db = new db();
 
-if (!$db->isLogged()) {
+if (!isset($_SESSION["islogged"])) {
     die();
 }
 

@@ -8,10 +8,14 @@
 
 session_start();
 
+if (!isset($_SESSION["islogged"])) {
+    die();
+}
+
 require_once "../class/db.class.php";
 
 $db = new db;
 
 $db->truncateTable(addslashes($_POST["tablename"]));
 
-echo '[jugugu]';
+echo '[]';

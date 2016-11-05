@@ -7,10 +7,15 @@ require_once "../class/csv.class.php";
 require_once "separator_list.php";
 require_once 'debug.php';
 
-$db = new db();
-if (!$db->isLogged()) {
+
+if (!isset($_SESSION["islogged"])) {
     die();
 }
+
+
+$db = new db();
+
+
 
 $arr_in = json_decode(file_get_contents('php://input'), true);
 
