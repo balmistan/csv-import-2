@@ -14,7 +14,7 @@ class db {
     public function __construct($debug = false) {
         $this->conn = NULL;
         $this->dbname = (isset($_SESSION["dbname"]) ? $_SESSION["dbname"] : "");
-        $this->hostname = (isset($_SESSION["info"]["hostname"]) ? $_SESSION["hostname"] : "");
+        $this->hostname = (isset($_SESSION["hostname"]) ? $_SESSION["hostname"] : "");
         $this->user = (isset($_SESSION["user"]) ? $_SESSION["user"] : "");
         $this->password = (isset($_SESSION["password"]) ? $_SESSION["password"] : "");
         $this->port = (isset($_SESSION["port"]) ? $_SESSION["port"] : "");
