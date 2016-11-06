@@ -8,7 +8,7 @@
 session_start();
 
 if (isset($_SESSION["islogged"])) {
-    unset($_SESSION["islogged"]);
+    header("Location: main.php");
 }
 
 
