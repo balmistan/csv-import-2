@@ -213,14 +213,14 @@ $arr_table_names = $db->getTableNames();
 
                             echo"
                             
-<input type=\"radio\" id=\"prevcsv\" name=\"radiopreview\" value=\"csv\" checked=\"checked\" >CSV
+<input type=\"radio\" id=\"prevcsv\" class=\"csvtodb\" name=\"radiopreview\" value=\"csv\" checked=\"checked\" ><span class=\"csvtodb\">CSV</span>
 
                                 <input type=\"radio\" id=\"prevdb\" name=\"radiopreview\" value=\"db\" >DB
                        ";
                         } else {
                             echo"
                            
-                                <input type=\"radio\" id=\"prevcsv\" name=\"radiopreview\" value=\"csv\" >CSV
+                                <input type=\"radio\" id=\"prevcsv\" class=\"csvtodb\" name=\"radiopreview\" value=\"csv\" ><span class=\"csvtodb\">CSV</span>
                             
                                 <input type=\"radio\" id=\"prevdb\" name=\"radiopreview\" value=\"db\" checked=\"checked\" >DB
                        ";

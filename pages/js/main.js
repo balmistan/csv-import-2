@@ -17,8 +17,11 @@ $(document).ready(function () {
     var direction_msg_1 = "Import von CSV in die Datenbank";
     var direction_msg_2 = "Export von Datenbank in die CSV-Datei";
 
+    var need_db_table_select = "Es ist notwendig, um eine DB-Table w&auml;hlen!";
+    var need_csv_upload = "Es ist notwendig, um eine CSV-Datei zu laden!";
+
     $(".dbtocsv").hide();
-    
+
     JQUERY4U.sendToServer("init.php"); //reset all settings parameters saved in session 
 
     /////////////EVENTS HANDLE//////////////////////////
@@ -41,7 +44,7 @@ $(document).ready(function () {
     $("#autoconf").click(function () {
         if ($(this).is(":checked")) {
             $(".csvconf").prop('disabled', 'disabled');
-             update();
+            update();
         } else {
             $(".csvconf").prop('disabled', false);
         }
@@ -59,14 +62,27 @@ $(document).ready(function () {
     });
 
     $('input:radio[name=radiopreview]').click(function () {
+
         if ($(this).val() == 'csv') {
-            show_csv_preview();
-        } else {
-            show_db_preview();
+
+            if (csvtabledata) {
+                show_csv_preview();
+            } else {
+                show_msg(need_csv_upload);
+            }
+
+        } else if ($(this).val() == 'db') {
+
+            if (dbtabledata) {
+                show_db_preview();
+            } else {
+                show_msg(need_db_table_select);
+            }
+
         }
     });
-    
-     $("#garbage").click(function () {
+
+    $("#garbage").click(function () {
         if ($("#select-mysql-table").val() == "") {
             alert("Keine Datenbanktabelle ausgew&auml;hlten!");
         } else if (confirm("Die Datenbanktabelle: " + $("#select-mysql-table").val() + " wird entleert! Vorgehen?")) {
@@ -179,7 +195,8 @@ $(document).ready(function () {
 
 
     function show_msg(msg) {
-        $("#info-msg").html(msg).fadeOut(5000);
+
+        $("#info-msg").html(msg).removeAttr('style').fadeOut(5000);
     }
 
 
@@ -215,6 +232,12 @@ $(document).ready(function () {
     }
 
     function show_csv_preview() {
+
+        if ($("input[name='radio_inp_exp']:checked").val() === "dbtocsv") {
+            $("#mytable").empty();
+            return;
+        }
+
         if (!csvtabledata) {
             csvtabledata = JQUERY4U.sendToServer("csvhandle.php")
         }
@@ -233,8 +256,8 @@ $(document).ready(function () {
         });
         //...
     }
-    
-    
+
+
 
 
     function getCodeForSelectboxDb() {
@@ -260,6 +283,8 @@ $(document).ready(function () {
 
             if ($('input:radio[name=radio_inp_exp]:checked').val() == "csvtodb") {
 
+
+
                 html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_1 + "<img src=\"../css/info.png\" title=\"" + alert_msg_1 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
                 html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"import-btn\">Import</button></td></tr></tfoot>";
                 if ($("#uploaded-file-name span").html() == "") {
@@ -270,7 +295,7 @@ $(document).ready(function () {
                     html_body += "<tr><td class=\"csv-column\">" + csvtabledata["tabheader"][i]["title"] + "</td><td>---></td><td>" + select_html_db + "</td><tr>\n";
                 }
 
-            } else {
+            } else {  //dbtocsv
 
                 html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_2 + "<img src=\"../css/info.png\" title=\"" + alert_msg_2 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
                 html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"export-btn\">Export</button>\n</tr></td></tfoot>";
@@ -288,19 +313,22 @@ $(document).ready(function () {
             //  $(".table-title").css("visibility", "hidden");
         }
     }
-    
-    
-  
+
+
+
     function checkbtntest() {
         if ($("input[name='radio_inp_exp']:checked").val() === "csvtodb") { //inport in db
             $(".csvtodb").show();
             $(".dbtocsv").hide();
+
+            $("#autoconf").removeAttr('disabled');
+
             if ($("#uploaded-file-name span").html() == "") {
-                show_msg("Es ist notwendig, um eine CSV-Datei zu laden!");
+                show_msg(need_csv_upload);
             } else {
                 show_csv_preview();
                 if ($("#select-mysql-table").val() == "") {
-                    show_msg("Es ist notwendig, um eine DB-Table w&auml;hlen!");
+                    show_msg(need_db_table_select);
                 } else {
                     show_config_table();
                 }
@@ -310,6 +338,11 @@ $(document).ready(function () {
             //alert("export")
             $(".csvtodb").hide();
             $(".dbtocsv").show();
+            $("#autoconf").removeAttr("checked");
+            $("#autoconf").attr('disabled', 'disabled');
+
+            $(".csvconf").removeAttr('disabled');
+
             if ($("#select-mysql-table").val() == "") {
                 show_msg("Es ist notwendig, um eine DB-Table w&auml;hlen!");
             } else {
@@ -322,7 +355,7 @@ $(document).ready(function () {
 ////////////////// BLOCKS /////////////////////////////////////
     $("#fileuploader").uploadFile({
         url: "upload.php",
-        maxFileSize: 2097152,  //2 MB
+        maxFileSize: 2097152, //2 MB
         sizeErrorStr: "<br /> Fehler! Hochladen .zip, weil es erlaubt max:",
         dragDrop: false,
         fileName: "myfile",
