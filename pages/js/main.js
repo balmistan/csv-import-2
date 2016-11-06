@@ -11,8 +11,8 @@ $(document).ready(function () {
     var csvtabledata = null;
     var select_html_db = null; //html-code selectbox config assoc.
 
-    var alert_msg_1 = "Wählen Sie die entsprechenden Spalten der Datenbanktabelle!";
-    var alert_msg_2 = "Wählen Sie die Spalten der Datenbanktabelle exportiert werden und zeigen neben dem Namen, den Sie die csv zuordnen möchten!";
+    var alert_msg_1 = "W&auml;hlen Sie die entsprechenden Spalten der Datenbanktabelle!";
+    var alert_msg_2 = "W&auml;hlen Sie die Spalten der Datenbanktabelle exportiert werden und zeigen neben dem Namen, den Sie die csv zuordnen möchten!";
 
     var direction_msg_1 = "Import von CSV in die Datenbank";
     var direction_msg_2 = "Export von Datenbank in die CSV-Datei";
@@ -68,7 +68,7 @@ $(document).ready(function () {
     
      $("#garbage").click(function () {
         if ($("#select-mysql-table").val() == "") {
-            alert("Keine Datenbanktabelle ausgewählten!");
+            alert("Keine Datenbanktabelle ausgew&auml;hlten!");
         } else if (confirm("Die Datenbanktabelle: " + $("#select-mysql-table").val() + " wird entleert! Vorgehen?")) {
             $.post("deleteondb.php", {"tablename": $("#select-mysql-table").val()}, function (data, status) {
                 //alert("Data: " + data + "\nStatus: " + status);
@@ -300,7 +300,7 @@ $(document).ready(function () {
             } else {
                 show_csv_preview();
                 if ($("#select-mysql-table").val() == "") {
-                    show_msg("Es ist notwendig, um eine DB-Table wählen!");
+                    show_msg("Es ist notwendig, um eine DB-Table w&auml;hlen!");
                 } else {
                     show_config_table();
                 }
@@ -311,7 +311,7 @@ $(document).ready(function () {
             $(".csvtodb").hide();
             $(".dbtocsv").show();
             if ($("#select-mysql-table").val() == "") {
-                show_msg("Es ist notwendig, um eine DB-Table wählen!");
+                show_msg("Es ist notwendig, um eine DB-Table w&auml;hlen!");
             } else {
                 show_db_preview();
                 show_config_table();
@@ -329,6 +329,7 @@ $(document).ready(function () {
         returnType: "json",
         showDelete: false,
         showDownload: false,
+        showProgress: true,
         multiple: false,
         acceptFiles: "text/csv, application/zip",
         uploadStr: "W&auml;len Sie der CSV-Dateiname<br /> zu laden",
