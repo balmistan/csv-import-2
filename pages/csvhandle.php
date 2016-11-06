@@ -40,7 +40,7 @@ $ret = array();
 $csv = new csv("../uploads/" . $_SESSION["info"]["fnup"], //csv file link
         $separator_list[$_SESSION["info"]["sep"]][1], 
         $enclosure_list[$_SESSION["info"]["encl"]][1], 
-        $_SESSION["info"]["chset"]
+        $_SESSION["info"]["chset"], "200"
         );
 
 

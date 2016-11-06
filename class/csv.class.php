@@ -13,16 +13,21 @@ class csv {
     private $ErrorStr;
     private $SeparatorList;
     private $EnclosureList;
+    private $Limit;
     
-    public function __construct($filename, $separator, $enclosure, $charset = "UTF-8") {
+    // $limit = "" means unlimited 
+    public function __construct($filename, $separator, $enclosure, $charset = "UTF-8", $limit="") {
         $this->Charset = $charset;
         $this->Filename = $filename;
         $this->Separator = ($separator == "\t") ? chr(9) : $separator;
         $this->Enclosure = $enclosure;  
         $this->ArrCSV = array("tabheader"=>array(), "tabcontent"=>array());
+        $this->Limit = intval($limit);
     }
 
     private function setArrCSV() {
+        $rowcount = 1;
+        
         if ($fp = fopen($this->Filename, "r")) {
 
             $arr_row = array();
@@ -35,6 +40,9 @@ class csv {
 
 
             while (($arr_row = fgetcsv($fp, 0, $this->Separator, $this->Enclosure)) !== false) { //false means end of file for exemple
+              
+               
+                
                 if ($arr_row === null) {  //an error occurred 
                     break;
                 }
@@ -45,7 +53,13 @@ class csv {
                 // $this->ArrCSV["data"][] = implode("-", $arr_row);
                 //$this->ArrCSV["data"][] = array_combine($this->ArrCSV["tabheader"], $arr_row);
                 $this->ArrCSV["tabcontent"][] = $arr_row;
-            }
+                
+                 
+                 if($rowcount++ == $this->Limit){
+                    break;
+                }
+              
+            }//while close
 
 
             fclose($fp);

@@ -14,7 +14,7 @@ class db {
     public function __construct($debug = false) {
         $this->conn = NULL;
         $this->dbname = (isset($_SESSION["dbname"]) ? $_SESSION["dbname"] : "");
-        $this->hostname = (isset($_SESSION["hostname"]) ? $_SESSION["hostname"] : "");
+        $this->hostname = (isset($_SESSION["info"]["hostname"]) ? $_SESSION["hostname"] : "");
         $this->user = (isset($_SESSION["user"]) ? $_SESSION["user"] : "");
         $this->password = (isset($_SESSION["password"]) ? $_SESSION["password"] : "");
         $this->port = (isset($_SESSION["port"]) ? $_SESSION["port"] : "");
@@ -27,7 +27,7 @@ class db {
 
     private function dbConnect() {
         /* Connect to an ODBC database using driver invocation */
-        $dsn = 'mysql:host=' . $this->hostname . ';port=' . $this->port . ';charset=UTF8;';
+        $dsn = 'mysql:host=' . $this->hostname . ';port=' . $this->port . ';charset=UTF8';
 
         try {
             $this->conn = new PDO($dsn, $this->user, $this->password, array(
@@ -35,9 +35,6 @@ class db {
             ));
 
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-            $this->setDB($this->dbname);
-            
         } catch (PDOException $e) {
             $this->conn = NULL;
             $this->error = $e->getMessage();
@@ -123,7 +120,7 @@ class db {
 
             $query = "INSERT INTO " . $table_name . " (" . $columns . ") VALUES (" . $str_values . ")";
 
-           // $str_debug .= "\$sql = \$this->conn->prepare(" . $query . ");\n";
+            $str_debug .= "\$sql = \$this->conn->prepare(" . $query . ");\n";
 
 
 
@@ -137,11 +134,11 @@ class db {
                     $count = 1;
                     foreach ($arr_csv_index as $csv_index) {
                         $sql->bindValue($count, $arrval[$csv_index]);
-                     //   $str_debug .= "\$sql->bindValue(" . $count . ", '" . $arrval[$csv_index] . "');\n<br />";
+                        $str_debug .= "\$sql->bindValue(" . $count . ", '" . $arrval[$csv_index] . "');\n<br />";
                         $count++;
                     }
                     $sql->execute();
-             //       $str_debug .= "\$sql->execute();\n<br />";
+                    $str_debug .= "\$sql->execute();\n<br />";
                 }
 
 

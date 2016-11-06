@@ -14,7 +14,7 @@
     call_user_func_array('var_dump', $var);
     $string = ob_get_clean();
 
-    if ($fp = fopen("../debug2.txt", "w+")) {
+    if ($fp = fopen("../debug2.txt", "a+")) {
         fwrite($fp, $string . "\n");
         fclose($fp);
     }

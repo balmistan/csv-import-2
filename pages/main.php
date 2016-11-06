@@ -7,6 +7,8 @@ ini_set('ignore_repeated_source', 0);
 
 session_start();
 
+//echo ini_get('upload_max_filesize');
+
 require_once "../class/db.class.php";
 require_once "separator_list.php";
 
@@ -51,7 +53,7 @@ $arr_table_names = $db->getTableNames();
 <!DOCTYPE html>
 <html lang="de" xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>csv-import</title>
+        <title>csv-import-2</title>
         <script src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/mytable.js"></script>
         <script src="js/jquery.form.js"></script>
@@ -204,7 +206,7 @@ $arr_table_names = $db->getTableNames();
 
                 <span id="table-title" class="table-title">
                     <fieldset>
-                        <legend>Tabelle Vorschau:</legend>
+                        <legend>Tabelle Vorschau (sie kann bis zu 200 Linien zeigen):</legend>
 
                         <?php
                         if ($show == "csv") {

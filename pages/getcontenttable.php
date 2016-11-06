@@ -17,6 +17,6 @@ $ret_var = array("tabheader" => array(), "tabcontent" => array());
 if ($_SESSION["info"]["tablename"] != "") {
     $ret_var["tabheader"] = $db->getColumnsName($_SESSION["info"]["tablename"]);
 
-    $ret_var["tabcontent"] = $db->getContentTable($_SESSION["info"]["tablename"], "*", "");
+    $ret_var["tabcontent"] = $db->getContentTable($_SESSION["info"]["tablename"], "*", "200");
 }
 echo json_encode($ret_var);

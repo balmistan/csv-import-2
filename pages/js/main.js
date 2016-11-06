@@ -18,12 +18,14 @@ $(document).ready(function () {
     var direction_msg_2 = "Export von Datenbank in die CSV-Datei";
 
     $(".dbtocsv").hide();
+    
+    JQUERY4U.sendToServer("init.php"); //reset all settings parameters saved in session 
 
     /////////////EVENTS HANDLE//////////////////////////
 
     //It does everything as it was immediately after login
     $("#reinit-btn").click(function () {
-        JQUERY4U.sendToServer("reinitbtn.php"); //reset all settings parameters saved in session 
+        JQUERY4U.sendToServer("init.php"); //reset all settings parameters saved in session 
         location.reload();
     });
 
@@ -320,15 +322,15 @@ $(document).ready(function () {
 ////////////////// BLOCKS /////////////////////////////////////
     $("#fileuploader").uploadFile({
         url: "upload.php",
-        maxFileSize: 16777216,
-        sizeErrorStr: "<br /> Fehler! Es erlaubt max:",
+        maxFileSize: 2097152,  //2 MB
+        sizeErrorStr: "<br /> Fehler! Hochladen .zip, weil es erlaubt max:",
         dragDrop: false,
         fileName: "myfile",
         returnType: "json",
         showDelete: false,
         showDownload: false,
         multiple: false,
-        acceptFiles: "text/csv",
+        acceptFiles: "text/csv, application/zip",
         uploadStr: "W&auml;len Sie der CSV-Dateiname<br /> zu laden",
         onSuccess: function (files, data, xhr, pd)
         {
