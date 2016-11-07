@@ -154,15 +154,22 @@ class db {
         return $issue;
     }
 
-    public function getContentTable($table_name, $columnnames = "*", $numrows = "") {
+    public function getContentTable($table_name, $columnnames = "*", $start=0, $numrows = "") {
 
-        $limit = ($numrows == "") ? "" : " limit " . $numrows;
+        $limit = ($numrows == "") ? "" : " limit " .intval($start) . "," . $numrows;
+        
+        $temp = array();
+        $arr_issue = array();
+        
+        //get columns names:
+        
+        $arr_issue["tabheader"] = $this->getColumnsName($table_name);
 
         try {
             $sql = $this->conn->prepare("SELECT " . $columnnames . " FROM " . $table_name . $limit);
             $sql->execute();
 
-            $temp = array();
+            
             //    $temp = $this->getColumnsName($table_name);
             //    $temp["data"] = array();
 
@@ -173,9 +180,24 @@ class db {
         } catch (PDOException $er) {
             
         }
+        
+        $arr_issue["tabcontent"] = $temp;
+        
+        //get the total number of rows
+        
+        try{
+             $sql = $this->conn->prepare("SELECT COUNT(*) FROM ". $table_name);
+             $sql->execute();
+             $arr_issue["numrows"] = $sql->fetchColumn(0);
+             
+        }catch (PDOException $er) {
+            
+        }
 
-        return $temp;
+        return $arr_issue;
     }
+    
+    
 
     public function truncateTable($tablename) {
         //Our SQL statement. This will empty / truncate the table $tablename

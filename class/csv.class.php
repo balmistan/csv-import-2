@@ -14,20 +14,22 @@ class csv {
     private $SeparatorList;
     private $EnclosureList;
     private $Limit;
-    
+    private $Start;
+
     // $limit = "" means unlimited 
-    public function __construct($filename, $separator, $enclosure, $charset = "UTF-8", $limit="") {
+    public function __construct($filename, $separator, $enclosure, $charset = "UTF-8", $start = 0, $limit = "") {
         $this->Charset = $charset;
         $this->Filename = $filename;
         $this->Separator = ($separator == "\t") ? chr(9) : $separator;
-        $this->Enclosure = $enclosure;  
-        $this->ArrCSV = array("tabheader"=>array(), "tabcontent"=>array());
+        $this->Enclosure = $enclosure;
+        $this->ArrCSV = array("tabheader" => array(), "tabcontent" => array());
         $this->Limit = intval($limit);
+        $this->Start = intval($start);
     }
 
     private function setArrCSV() {
-        $rowcount = 1;
-        
+        $rowcount = 0;
+
         if ($fp = fopen($this->Filename, "r")) {
 
             $arr_row = array();
@@ -40,9 +42,6 @@ class csv {
 
 
             while (($arr_row = fgetcsv($fp, 0, $this->Separator, $this->Enclosure)) !== false) { //false means end of file for exemple
-              
-               
-                
                 if ($arr_row === null) {  //an error occurred 
                     break;
                 }
@@ -50,18 +49,23 @@ class csv {
                 if (count($arr_row) == 1 && $arr_row[0] === null) { //an empty row
                     continue;
                 }
+
+                $rowcount++;
+
+                if ($rowcount <= $this->Start) {
+                    continue;
+                }
+
+                if ($rowcount > $this->Start + $this->Limit) {
+                    continue;
+                }
+
                 // $this->ArrCSV["data"][] = implode("-", $arr_row);
                 //$this->ArrCSV["data"][] = array_combine($this->ArrCSV["tabheader"], $arr_row);
                 $this->ArrCSV["tabcontent"][] = $arr_row;
-                
-                 
-                 if($rowcount++ == $this->Limit){
-                    break;
-                }
-              
             }//while close
 
-
+            $this->ArrCSV["numrows"] = $rowcount;
             fclose($fp);
         }
     }
