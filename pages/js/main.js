@@ -216,17 +216,22 @@ $(document).ready(function () {
     }
 
     function show_db_preview() {
-        if (!dbtabledata) {
-            dbtabledata = JQUERY4U.sendToServer("getcontenttable.php");
-        }
+        //  if (!dbtabledata) {
+        //      dbtabledata = JQUERY4U.sendToServer("getcontenttable.php");
+        //  }
 
         $('input:radio[name=radiopreview]').val(['db']); //set radiobutton for title
 
         $("#mytable").empty();
 
         $('#mytable').mytable({
-            'tablearrayjs': dbtabledata,
-            'numrowperpage': 10
+            //'tablearrayjs': dbtabledata,
+            'numrowperpage': 10,
+            'serverside': true,
+            'ajaxpage': "getcontenttable.php",
+            'success': function (arr) {
+                dbtabledata = JSON.parse(arr);
+            }
         });
 
     }
@@ -238,26 +243,28 @@ $(document).ready(function () {
             return;
         }
 
-        if (!csvtabledata) {
-            csvtabledata = JQUERY4U.sendToServer("csvhandle.php")
-        }
+        //    if (!csvtabledata) {
+        //        csvtabledata = JQUERY4U.sendToServer("csvhandle.php")
+        //    }
 //alert(csvtabledata["info"]["sep"])
 
-        $("#charset").val(csvtabledata["info"]["chset"]);
-        $("#separator").val(csvtabledata["info"]["sep"]);
 
-        $('input:radio[name=radiopreview]').val(['csv']); //set radiobutton for title
 
         $("#mytable").empty();
 
         $('#mytable').mytable({
-            'tablearrayjs': csvtabledata,
-            'numrowperpage': 10
+            //  'tablearrayjs': csvtabledata,
+            'numrowperpage': 10,
+            'serverside': true,
+            'ajaxpage': "csvhandle.php",
+            'success': function (arr) {
+                csvtabledata = JSON.parse(arr);
+                $("#charset").val(csvtabledata["info"]["chset"]);
+                $("#separator").val(csvtabledata["info"]["sep"]);
+                $('input:radio[name=radiopreview]').val(['csv']); //set radiobutton for title
+            }
         });
-        //...
     }
-
-
 
 
     function getCodeForSelectboxDb() {

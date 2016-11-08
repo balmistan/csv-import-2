@@ -206,7 +206,7 @@ $arr_table_names = $db->getTableNames();
 
                 <span id="table-title" class="table-title">
                     <fieldset>
-                        <legend>Tabelle Vorschau (sie kann bis zu 200 Linien zeigen):</legend>
+                        <legend>Tabelle Vorschau:</legend>
 
                         <?php
                         if ($show == "csv") {

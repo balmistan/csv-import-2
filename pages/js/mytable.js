@@ -11,23 +11,73 @@
 // valori di default
         var config = {
             'tablearrayjs': Array(),
-            'numrowperpage': 2
+            'numrowperpage': 2,
+            'serverside': false,
+            'ajaxpage': '',
+            'success': ''
         };
         if (options)
             $.extend(config, options);
-        this.each(function () {
-            obj = $(this);
-            $(obj).data("tablearray", config["tablearrayjs"]);
-            $(obj).data("tablepage", 1);
-            $(obj).data("numrowperpage", config["numrowperpage"]);
-            tabledraw();
-            //  alert(hd+dt)
-        });  //close this.each(function () {...
+
+
+        //  this.each(function () {
+        obj = $(this);
+        $(obj).data("tablearray", config["tablearrayjs"]);
+        $(obj).data("tablepage", 1);
+        $(obj).data("numrowperpage", config["numrowperpage"]);
+        $(obj).data("serverside", config["serverside"]);
+        $(obj).data("ajaxpage", config["ajaxpage"]);
+
+        tabledraw();
+
+        if (typeof config["success"] == 'function') {
+            return this.each(function () {
+                options.success(JSON.stringify($(obj).data("tablearray")));
+
+            });
+        }
+        //  alert(hd+dt)
+        //     });  //close this.each(function () {...
 
     }
 
 
     function tabledraw() {
+        if ($(obj).data("serverside")) {
+            confserverside();
+        }
+        tabledraw_clientside();
+    }
+
+
+    function confserverside() {
+
+        var startrow = $(obj).data("tablepage") == 1 ? 0 : ($(obj).data("tablepage") - 1) * $(obj).data("numrowperpage");
+
+
+        $.ajax({
+            url: $(obj).data("ajaxpage"),
+            type: 'POST',
+            data: JSON.stringify({"start": startrow, "limit": $(obj).data("numrowperpage")}),
+            async: false,
+            success: function (data) {
+                try {
+                    $(obj).data("tablearray", JSON.parse(data));
+
+                } catch (error) {
+                    alert("ERROR!");
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+
+    }
+
+
+
+    function tabledraw_clientside() {
         var hd = "<thead>";
         var dt = "<tbody>";
 
@@ -45,13 +95,24 @@
         }
 
         var totalnumrows = 0;
-        var startrow = $(obj).data("tablepage") == 1 ? 0 : ($(obj).data("tablepage") - 1) * $(obj).data("numrowperpage");
-        var endrow = $(obj).data("tablepage") * $(obj).data("numrowperpage");
-        // create data content
+        var startrow = 0;
+        var endrow = 0;
+        if($(obj).data("serverside")){
+            startrow = 0;
+            endrow = $(obj).data("numrowperpage");
+        }else{
+         startrow = $(obj).data("tablepage") == 1 ? 0 : ($(obj).data("tablepage") - 1) * $(obj).data("numrowperpage");
+         endrow = $(obj).data("tablepage") * $(obj).data("numrowperpage");
+    }
+            // create data content
 
         if (typeof (($(obj).data("tablearray")["tabcontent"][0])) !== 'undefined') {
-            totalnumrows = $(obj).data("tablearray")["tabcontent"].length
 
+            if (($(obj).data("tablearray")["numrows"]) !== 'undefined') {
+                totalnumrows = $(obj).data("tablearray")["numrows"];
+            } else {
+                totalnumrows = $(obj).data("tablearray")["tabcontent"].length
+            }
             //alert(totalnumrows)
 
             if (typeof ($(obj).data("tablearray")["tabheader"][0]["data"]) === 'undefined') {
@@ -76,7 +137,7 @@
                     dt += "</tr>";
                 }//close extern for
             }//close else
-        } 
+        }
         dt += "</tbody>";
 
 
@@ -92,7 +153,7 @@
         }
 
         if ($(obj).data("tablepage") == 1) {
-            codebtn += "<button class=\"cbold\">1</button>";
+            codebtn += "<button class=\"cred\">1</button>";
         } else {
             codebtn += "<button>1</button>";
         }
@@ -120,11 +181,11 @@
         }
         //create footer
         var tf = "";
-             
-        if(totalnumrows){
-            tf += "<tfoot><tr><td colspan=\"" + numcol + "\"><div id=\"buttons\">" + codebtn + "</div></td></tr>\n<tr><td colspan=\"" + numcol + "\">Gesamtergebnisse: "+totalnumrows+"</td></tr>\n</tfoot>";
-        }else{
-            tf += "<tfoot><tr><td class=\"table-leer-msg\" colspan=\"" + numcol + "\">Die Tabelle ist leer!</td></tr></tfoot>";
+
+        if (totalnumrows) {
+            tf += "<tfoot><tr><td colspan=\"" + numcol + "\"><div id=\"buttons\">" + codebtn + "</div></td></tr>\n<tr><td colspan=\"" + numcol + "\">Gesamtergebnisse: " + totalnumrows + "</td></tr>\n</tfoot>";
+        } else {
+            tf += "<tfoot><tr><td colspan=\"" + numcol + "\">Die Tabelle ist leer!</td></tr></tfoot>";
         }
 
         $(obj).html(hd + dt + tf);

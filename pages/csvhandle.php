@@ -13,6 +13,8 @@ if (!isset($_SESSION["islogged"])) {
     die();
 }
 
+$arr_in = json_decode(file_get_contents('php://input'), true);
+
 
 if($_SESSION["info"]["autoconf"]=="1"){
     $content = file_get_contents("../uploads/" . $_SESSION["info"]["fnup"]);
@@ -40,7 +42,7 @@ $ret = array();
 $csv = new csv("../uploads/" . $_SESSION["info"]["fnup"], //csv file link
         $separator_list[$_SESSION["info"]["sep"]][1], 
         $enclosure_list[$_SESSION["info"]["encl"]][1], 
-        $_SESSION["info"]["chset"], 0, 200
+        $_SESSION["info"]["chset"], $arr_in["start"], $arr_in["limit"]
         );
 
 
