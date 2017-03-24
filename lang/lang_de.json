@@ -1,0 +1,53 @@
+{
+	"label": {
+		"dbname": "DB Name",
+		"server": "Server",
+		"port": "Port",
+		"username": "Benutzername",
+		"password": "Passwort",
+		"loginbtn": "Zugriff",
+                "autosetting": "Autokonfiguration",
+                "separator": "Spaltentrenn:",
+                "enclosure": "Kapselung Text:",
+                "charset": "Zeichensatz:"
+	},
+        "msg": {
+            "write_denied": "-Achtung! Das Programm hat keine Schreibrechte für den Ordner: ",
+            "alert_msg_1": "Wählen Sie die entsprechenden Spalten der Datenbanktabelle!",
+            "alert_msg_2": "Wählen Sie die Spalten der Datenbanktabelle exportiert werden und zeigen neben dem Namen, den Sie die csv zuordnen möchten!",
+            "direction_msg_1":"Import von CSV in die Datenbank",
+            "direction_msg_2":"Export von Datenbank in die CSV-Datei",
+            "need_db_table_select":"Es ist notwendig, um eine DB-Table wählen!",
+            "need_csv_upload":"Es ist notwendig, um eine CSV-Datei zu laden!"
+        },
+        "error":{
+            "login_failed": "Zugriff verweigert!",
+            "upload_error": "Fehler! Hochladen .zip, weil es erlaubt max:"
+        },
+        "legend": {
+            "database_name": "Datenbank",
+            "preview_table": "Tabelle Vorschau:",
+            "uploaded": "Hochgeladen:",
+            "csv_settings": "Konfigurations csv"
+        },
+        "option_select": {
+            "select_table" : "Wählen Sie die Tabelle",
+            "semicolon": "SEMIKOLON",
+            "comma": "KOMMA",
+            "dot": "PUNKT",
+            "colon": "DOPPELPUNKT",
+            "tab": "TAB",
+            "space": "RAUM",
+            "doublequotes": "Anführungszeichen",
+            "quotes": "Apostroph" 
+        },
+        "info": {
+            "trash": "leert gesamte Datenbanktabelle",
+            "info_1": "Die erste Zeile der CSV sollte immer die Namen der Spalten enthalten"
+        }, 
+        "button": {
+            "upload": "Wälen Sie der CSV-Dateiname zu laden",
+            "reset": "Reset-Einstallungen",
+            "logout": "Beenden"
+        }
+}

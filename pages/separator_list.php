@@ -7,17 +7,17 @@
  */
 
 $separator_list = array(
-    "semicolon" => array("SEMIKOLON", ";"),
-    "comma" => array("KOMMA", ","),
-    "dot" => array("PUNKT", "."),
-    "colon" => array("DOPPELPUNKT", ":"),
-    "tab" => array("TAB", "\t"),
-    "space" => array("RAUM", "\s")
+    "semicolon" => array($option_select["semicolon"], ";"),
+    "comma" => array($option_select["comma"], ","),
+    "dot" => array($option_select["dot"], "."),
+    "colon" => array($option_select["colon"], ":"),
+    "tab" => array($option_select["tab"], "\t"),
+    "space" => array($option_select["space"], "\s")
 );
 
 $enclosure_list = array(
-    "doublequotes" => array("Anf&uuml;hrungszeichen", '"'),
-    "quotes" => array("Apostroph", "'")
+    "doublequotes" => array($option_select["doublequotes"], '"'),
+    "quotes" => array($option_select["quotes"], "'")
 );
 
 

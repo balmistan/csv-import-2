@@ -6,6 +6,32 @@
 
 $(document).ready(function () {
 
+    var lang_text = Array();
+    
+  /*  $.ajax( "../lang/lang_de.php?json=1" )
+  .done(function(json) {
+    alert(json)
+  })
+*/
+  /*  $.getJSON("../lang/lang_de.php?json=1", function (json) {
+      alert(json)
+    });
+*/
+    $.ajax({
+        dataType: "json",
+        url: "../lang/lang_"+$("#language").val()+".json",
+        async: false,
+        success: function (data) { 
+             lang_text = data;
+            //alert(JSON.stringify(lang_text));
+
+        }
+    });
+
+
+    //alert(JSON.stringify(lang_text));
+
+
 //INIT
     var dbtabledata = null;
     var csvtabledata = null;
@@ -363,7 +389,7 @@ $(document).ready(function () {
     $("#fileuploader").uploadFile({
         url: "upload.php",
         maxFileSize: 2097152, //2 MB
-        sizeErrorStr: "<br /> Fehler! Hochladen .zip, weil es erlaubt max:",
+        sizeErrorStr: lang_text["error"]["upload_error"],
         dragDrop: false,
         fileName: "myfile",
         returnType: "json",
@@ -372,7 +398,7 @@ $(document).ready(function () {
         showProgress: true,
         multiple: false,
         acceptFiles: "text/csv, application/zip",
-        uploadStr: "W&auml;len Sie der CSV-Dateiname<br /> zu laden",
+        uploadStr: lang_text["button"]["upload"],
         onSuccess: function (files, data, xhr, pd)
         {
             csvtabledata = null;
@@ -393,6 +419,8 @@ $(document).ready(function () {
     });
 //////////////////////////////////////////////////////////////
 
+
+    $("#dialog").dialog();
 
 
 });//close $(document).ready...

@@ -8,8 +8,9 @@ ini_set('ignore_repeated_source', 0);
 session_start();
 
 //echo ini_get('upload_max_filesize');
-
+require_once '../config.php';
 require_once "../class/db.class.php";
+require_once 'language_read.php';
 require_once "separator_list.php";
 
 
@@ -55,12 +56,14 @@ $arr_table_names = $db->getTableNames();
     <head>
         <title>csv-import-2</title>
         <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript" src="js/mytable.js"></script>
         <script src="js/jquery.form.js"></script>
         <script src="js/jquery.uploadfile.min.js"></script>
         <script src="js/jsfunction.js"></script>
         <script src="../dragscroll-master/dragscroll.js"></script>
         <script src="js/main.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
         <link rel="stylesheet" type="text/css" href="../css/mytable.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="../css/screen.css" />
         <link rel="stylesheet" type="text/css" href="../css/main.css" />
@@ -69,23 +72,24 @@ $arr_table_names = $db->getTableNames();
         <span id="errors">
             <?php
             if (!is_writable("../logs/")) {
-                echo '-Achtung! Das Programm hat keine Schreibrechte f&uuml;r den Ordner: logs' . '<br />';
+                echo $msg['write_denied'] . 'logs' . '<br />';
             }
             if (!is_writable("../uploads/")) {
-                echo '-Achtung! Das Programm hat keine Schreibrechte f&uuml;r den Ordner: uploads' . '<br />';
+                echo $msg['write_denied'] . 'uploads' . '<br />';
             }
-           
             ?>
         </span>
         <div id="wrapper">
 
             <div id="content">
                 <fieldset>
-                    <legend>Datenbank: <?php echo $_SESSION["dbname"]; ?></legend>
-
+                    <?php
+                    echo "<legend>" . $legend["database_name"] . ": " . $_SESSION["dbname"] . "</legend>";
+                    ?>
                     <select id="select-mysql-table">
-                        <option data-id="0" value = "" >W&auml;hlen Sie die Tabelle</option>
                         <?php
+                        echo "<option data-id=\"0\" value = \"\" >" . $option_select["select_table"] . "</option>";
+
                         for ($i = 1; $i <= count($arr_table_names); $i++) {
                             if ($i == $optid) {
                                 echo "<option data-id=\"" . $i . "\" value=\"" . $arr_table_names[$i - 1] . "\" selected=\"selected\">" . $arr_table_names[$i - 1] . "</option>\n";
@@ -95,8 +99,9 @@ $arr_table_names = $db->getTableNames();
                         }
                         ?>
                     </select> 
-                    <img src="../css/garbage.png" alt="truncate table" title="leert gesamte Datenbanktabelle" id="garbage" />
-
+                    <?php
+                    echo "<img src=\"../css/garbage.png\" alt=\"truncate table\" title=\"" . $info["trash"] . "\" id=\"garbage\" />";
+                    ?>
                 </fieldset>
 
 
@@ -109,7 +114,7 @@ $arr_table_names = $db->getTableNames();
 
                             echo"<label for=\"csv_db\">
                             <input type=\"radio\" id=\"csv_db\" name=\"radio_inp_exp\" value=\"csvtodb\">CSV --- > DB
-                                <img src=\"../css/info.png\" title=\"Die erste Zeile der CSV sollte immer die Namen der Spalten enthalten\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\" />
+                                <img src=\"../css/info.png\" title=\"" . $info["info_1"] . "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\" />
                         </label>
                         -
                         <br />
@@ -119,7 +124,7 @@ $arr_table_names = $db->getTableNames();
                         } else {
                             echo"<label for=\"csv_db\">
                             <input type=\"radio\" id=\"csv_db\" checked=\"checked\" name=\"radio_inp_exp\"  value=\"csvtodb\">CSV --- > DB
-                                <img src=\"../css/info.png\" title=\"Die erste Zeile der CSV sollte immer die Namen der Spalten enthalten\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\" />
+                                <img src=\"../css/info.png\" title=\"" . $info["info_1"] . "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\" />
                         </label>
                         -
                         <br />
@@ -131,84 +136,85 @@ $arr_table_names = $db->getTableNames();
                     </div>
 
                     <div id="fileuploader" class="csvtodb"></div> 
+                    <?php
+                    echo "<p id=\"uploaded-file-name\" class=\"csvtodb\">" . $legend["uploaded"] . "&nbsp;<span><?php echo $fnup; ?></span></p>
+                   
+                        <fieldset>
+                        <legend>" . $legend["csv_settings"] . "</legend>
 
-                    <p id="uploaded-file-name" class="csvtodb">Hochgeladen:&nbsp;<span><?php echo $fnup; ?></span></p>
+                        <label for=\"autoconf\">";
+
+                    if ($autoconf) {
+                        echo "<input type=\"checkbox\" name=\"autoconf\" id=\"autoconf\" checked=\"checked\" />" . $label["autosetting"] . "</label>";
+                    } else {
+                        echo "<input type=\"checkbox\" name=\"autoconf\" id=\"autoconf\" />" . $label["autosetting"] . "</label>";
+                    }
 
 
-                    <fieldset>
-                        <legend>Konfigurations csv</legend>
+                    echo"<label for=\"separator\">" . $label["separator"] . "</label>
 
-                        <label for="autoconf">
-                            <?php
-                            if ($autoconf) {
-                                echo "<input type=\"checkbox\" name=\"autoconf\" id=\"autoconf\" checked=\"checked\" />Autokonfiguration</label>";
+                    <select name=\"separator\" id=\"separator\" class=\"csvconf\" disabled=\"disabled\">";
+
+
+                    foreach ($separator_list as $key => $value) {
+                        if ($key == $sep) {
+                            echo "<option selected=\"selected\" value=\"" . $key . "\">" . $value[0] . "</option>\n";
+                        } else {
+                            echo "<option value=\"" . $key . "\">" . $value[0] . "</option>\n";
+                        }
+                    }
+                    ?>
+
+                    </select>
+                    <?php
+                    echo"<label for=\"enclosure\">".$label["enclosure"]."</label>
+                    <select name=\"enclosure\" id=\"enclosure\" class=\"csvconf\" disabled=\"disabled\">";
+
+                    foreach ($enclosure_list as $key => $value) {
+                        if ($key == $encl) {
+                            echo "<option selected=\"selected\" value=\"" . $key . "\">" . $value[0] . "</option>\n";
+                        } else {
+                            echo "<option value=\"" . $key . "\">" . $value[0] . "</option>\n";
+                        }
+                    }
+                    
+                    echo"</select>
+                    <span class=\"csvtodb\">
+
+                        <label for=\"charset\">".$label["charset"]."</label>
+                        <select name=\"charset\" id=\"charset\" class=\"csvconf\" disabled=\"disabled\">
+                            <option value=\"UTF-8\">UTF-8</option>";
+                            
+                            if ($chset == "ISO-8859-1") {
+                                echo "<option selected=\"selected\" value=\"ISO-8859-1\" >ISO-8859-1</option>";
                             } else {
-                                echo "<input type=\"checkbox\" name=\"autoconf\" id=\"autoconf\" />Autokonfiguration</label>";
+                                echo "<option value=\"ISO-8859-1\">ISO-8859-1</option>";
                             }
                             ?>
-
-                            <label for="separator">Spaltentrenn:</label>
-
-                            <select name="separator" id="separator" class="csvconf" disabled="disabled">
-
-                                <?php
-                                foreach ($separator_list as $key => $value) {
-                                    if ($key == $sep) {
-                                        echo "<option selected=\"selected\" value=\"" . $key . "\">" . $value[0] . "</option>\n";
-                                    } else {
-                                        echo "<option value=\"" . $key . "\">" . $value[0] . "</option>\n";
-                                    }
-                                }
-                                ?>
-
-                            </select>
-
-                            <label for="enclosure">Kapselung Text:</label>
-                            <select name="enclosure" id="enclosure" class="csvconf" disabled="disabled">
-                                <?php
-                                foreach ($enclosure_list as $key => $value) {
-                                    if ($key == $encl) {
-                                        echo "<option selected=\"selected\" value=\"" . $key . "\">" . $value[0] . "</option>\n";
-                                    } else {
-                                        echo "<option value=\"" . $key . "\">" . $value[0] . "</option>\n";
-                                    }
-                                }
-                                ?>
-                            </select>
-                            <span class="csvtodb">
-
-                                <label for="charset">Zeichensatz:</label>
-                                <select name="charset" id="charset" class="csvconf" disabled="disabled">
-                                    <option value="UTF-8">UTF-8</option>
-                                    <?php
-                                    if ($chset == "ISO-8859-1") {
-                                        echo "<option selected=\"selected\" value=\"ISO-8859-1\" >ISO-8859-1</option>";
-                                    } else {
-                                        echo "<option value=\"ISO-8859-1\">ISO-8859-1</option>";
-                                    }
-                                    ?>
-                                </select>
-                                <img src="../css/info.png" title="Charset bezieht sich immer auf csv. Datenbank muss immer Charset UTF-8" alt="info" class="info-icon" onclick="alert(this.getAttribute('title'))" />
-                            </span>
-                            <p></p>
-                            <span class="label dbtocsv">Zeichensatz: UTF-8</span>
+                        </select>
+                        <img src="../css/info.png" title="Charset bezieht sich immer auf csv. Datenbank muss immer Charset UTF-8" alt="info" class="info-icon" onclick="alert(this.getAttribute('title'))" />
+                    </span>
+                    <p></p>
+                    <span class="label dbtocsv">Zeichensatz: UTF-8</span>
                     </fieldset>
 
 
 
                 </div>
-                <button id="reinit-btn">Reset-Einstellungen</button>
-                <button id="logout-btn" onclick="window.location.href = 'logout.php'">Beenden</button>
-
+                <?php
+                echo"<button id=\"reinit-btn\">".$button["reset"]."</button>
+                <button id=\"logout-btn\" onclick=\"window.location.href = 'logout.php'\">".$button["logout"]."</button>";
+?>
             </div>
 
             <div id="sidebar-wrapper">
 
                 <span id="table-title" class="table-title">
                     <fieldset>
-                        <legend>Tabelle Vorschau:</legend>
-
                         <?php
+                        echo "<legend>" . $legend["preview_table"] . "</legend>";
+
+
                         if ($show == "csv") {
 
                             echo"
@@ -226,7 +232,7 @@ $arr_table_names = $db->getTableNames();
                        ";
                         }
                         ?>
-                       
+
                 </span>
 
                 </fieldset>
@@ -246,7 +252,7 @@ $arr_table_names = $db->getTableNames();
                 </div>
             </div>
             <div id="sidenotes-wrapper">
-               
+
                 <div id="sidenotes">
 
                     <table id="configuration-table">
@@ -256,7 +262,14 @@ $arr_table_names = $db->getTableNames();
                 </div>
 
             </div>
-           <!-- <div id="debug-div"></div>-->
+            <!-- <div id="debug-div"></div>-->
         </div>
+
+        <div id="dialog" title="Basic dialog">
+            <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+        </div>
+        <?php
+        echo "<input type=\"hidden\" id=\"language\" value=\"" . $language . "\" />";
+        ?>
     </body>
 </html>

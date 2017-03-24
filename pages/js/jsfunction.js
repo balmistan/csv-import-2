@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+
 JQUERY4U = {
     sendToServer: function (linktosend, datatosend) {
         datatosend = datatosend || "[]";

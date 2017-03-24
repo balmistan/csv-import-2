@@ -1,0 +1,53 @@
+{
+	"label": {
+		"dbname": "Nome DB",
+		"server": "Server",
+		"port": "Porta",
+		"username": "Username",
+		"password": "Password",
+		"loginbtn": "Accedi",
+                "autosetting": "Autoconfigurazione",
+                "separator": "Carattere separatore:",
+                "enclosure": "Carattere di incapsulamento:",
+                "charset": "Charset:"
+	},
+        "msg": {
+            "write_denied": "-Attenzione! Il programma non ha permessi di scrittura sulla cartella: ",
+            "alert_msg_1": "Wählen Sie die entsprechenden Spalten der Datenbanktabelle!",
+            "alert_msg_2": "Wählen Sie die Spalten der Datenbanktabelle exportiert werden und zeigen neben dem Namen, den Sie die csv zuordnen möchten!",
+            "direction_msg_1":"Import von CSV in die Datenbank",
+            "direction_msg_2":"Export von Datenbank in die CSV-Datei",
+            "need_db_table_select":"Es ist notwendig, um eine DB-Table wählen!",
+            "need_csv_upload":"É necessario caricare il file CSV!"
+        },
+        "error":{
+            "login_failed":"Accesso negato!",
+            "upload_error": "Errore! Caricare in formato zip poichè la dimensione massima permessa è "
+        },
+        "legend": {
+            "database_name": "Database",
+            "preview_table": "Anteprima Tabella:",
+            "uploaded": "File caricato:",
+            "csv_settings": "Configurazione csv"
+        },
+        "option_select": {
+            "select_table" : "Selezionare una tabella",
+            "semicolon": "PUNTO E VIRGOLA",
+            "comma": "VIRGOLA",
+            "dot": "PUNTO",
+            "colon": "DUE PUNTI",
+            "tab": "TAB",
+            "space": "SPAZIO",
+            "doublequotes": "VIRGOLETTE",
+            "quotes": "APOSTROFO" 
+        },
+        "info": {
+            "trash": "Svuota l' intera tabella MySql",
+            "info_1": "Nel CSV la prima riga deve essere sempre il nome della colonna."
+        },
+        "button": {
+            "upload": "Selezionare il file da caricare",
+            "reset": "Reset configurazione",
+            "logout": "Logout"
+        }
+}
