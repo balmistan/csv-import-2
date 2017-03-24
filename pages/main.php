@@ -54,6 +54,7 @@ $arr_table_names = $db->getTableNames();
 <!DOCTYPE html>
 <html lang="de" xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        <meta charset="utf-8"/>
         <title>csv-import-2</title>
         <script src="js/jquery-1.11.1.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -82,6 +83,7 @@ $arr_table_names = $db->getTableNames();
         <div id="wrapper">
 
             <div id="content">
+                <?php echo"<input type=\"button\" onclick=\"window.location = '?lang=it';\" value=\"IT\" /><input type=\"button\" onclick=\"window.location = '?lang=de';\" value=\"DE\" />"; ?>
                 <fieldset>
                     <?php
                     echo "<legend>" . $legend["database_name"] . ": " . $_SESSION["dbname"] . "</legend>";
@@ -167,7 +169,7 @@ $arr_table_names = $db->getTableNames();
 
                     </select>
                     <?php
-                    echo"<label for=\"enclosure\">".$label["enclosure"]."</label>
+                    echo"<label for=\"enclosure\">" . $label["enclosure"] . "</label>
                     <select name=\"enclosure\" id=\"enclosure\" class=\"csvconf\" disabled=\"disabled\">";
 
                     foreach ($enclosure_list as $key => $value) {
@@ -177,22 +179,22 @@ $arr_table_names = $db->getTableNames();
                             echo "<option value=\"" . $key . "\">" . $value[0] . "</option>\n";
                         }
                     }
-                    
+
                     echo"</select>
                     <span class=\"csvtodb\">
 
-                        <label for=\"charset\">".$label["charset"]."</label>
+                        <label for=\"charset\">" . $label["charset"] . "</label>
                         <select name=\"charset\" id=\"charset\" class=\"csvconf\" disabled=\"disabled\">
                             <option value=\"UTF-8\">UTF-8</option>";
-                            
-                            if ($chset == "ISO-8859-1") {
-                                echo "<option selected=\"selected\" value=\"ISO-8859-1\" >ISO-8859-1</option>";
-                            } else {
-                                echo "<option value=\"ISO-8859-1\">ISO-8859-1</option>";
-                            }
-                            ?>
-                        </select>
-                        <img src="../css/info.png" title="Charset bezieht sich immer auf csv. Datenbank muss immer Charset UTF-8" alt="info" class="info-icon" onclick="alert(this.getAttribute('title'))" />
+
+                    if ($chset == "ISO-8859-1") {
+                        echo "<option selected=\"selected\" value=\"ISO-8859-1\" >ISO-8859-1</option>";
+                    } else {
+                        echo "<option value=\"ISO-8859-1\">ISO-8859-1</option>";
+                    }
+                    ?>
+                    </select>
+                    <img src="../css/info.png" title="Charset bezieht sich immer auf csv. Datenbank muss immer Charset UTF-8" alt="info" class="info-icon" onclick="alert(this.getAttribute('title'))" />
                     </span>
                     <p></p>
                     <span class="label dbtocsv">Zeichensatz: UTF-8</span>
@@ -202,9 +204,9 @@ $arr_table_names = $db->getTableNames();
 
                 </div>
                 <?php
-                echo"<button id=\"reinit-btn\">".$button["reset"]."</button>
-                <button id=\"logout-btn\" onclick=\"window.location.href = 'logout.php'\">".$button["logout"]."</button>";
-?>
+                echo"<button id=\"reinit-btn\">" . $button["reset"] . "</button>
+                <button id=\"logout-btn\" onclick=\"window.location.href = 'logout.php?lang=".$language."'\">" . $button["logout"] . "</button>";
+                ?>
             </div>
 
             <div id="sidebar-wrapper">
@@ -266,7 +268,7 @@ $arr_table_names = $db->getTableNames();
         </div>
 
         <div id="dialog" title="Basic dialog">
-            <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+            <!--<p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p> -->
         </div>
         <?php
         echo "<input type=\"hidden\" id=\"language\" value=\"" . $language . "\" />";

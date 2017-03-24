@@ -420,7 +420,7 @@ $(document).ready(function () {
 //////////////////////////////////////////////////////////////
 
 
-    $("#dialog").dialog();
+ //   $("#dialog").dialog();
 
 
 });//close $(document).ready...

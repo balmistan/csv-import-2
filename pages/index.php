@@ -39,7 +39,7 @@ if (isset($post_var["loginbtn"])) {
     } else {
         if ($db->setDB($post_var["dbname"])) {
             $_SESSION["islogged"] = true;
-            header("Location: main.php");
+            header("Location: main.php?lang=".$language);
         } else {
             $err_msg = "Datenbank nicht gefunden!";
               $err_msg .= " - ".$err_msg = $db->getError();
@@ -61,7 +61,8 @@ echo "
 
     <body>
 
-        <form class=\"box login\" action=\"?\" method=\"post\">
+        <form class=\"box login\" action=\"?lang=".$language."\" method=\"post\">
+            
         ";
           
             if ($err_msg != "") {
@@ -69,6 +70,7 @@ echo "
             }
             echo "
             <fieldset class=\"boxBody\">
+                <button type=\"button\" onclick=\"window.location = '?lang=it';\">IT</button><button type=\"button\" onclick=\"window.location = '?lang=de';\">DE</button>
                 <label for=\"dbname\">".$label['dbname']."</label>
                 <input type=\"text\" name=\"dbname\" id=\"dbname\"/>
                 <label for=\"server\">".$label['server']."</label>
