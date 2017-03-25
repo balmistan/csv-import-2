@@ -14,7 +14,8 @@
             'numrowperpage': 2,
             'serverside': false,
             'ajaxpage': '',
-            'success': ''
+            'success': '',
+            'emptymsg': 'The table is empty'
         };
         if (options)
             $.extend(config, options);
@@ -27,7 +28,8 @@
         $(obj).data("numrowperpage", config["numrowperpage"]);
         $(obj).data("serverside", config["serverside"]);
         $(obj).data("ajaxpage", config["ajaxpage"]);
-
+        $(obj).data("emptymsg", config["emptymsg"]);
+        
         tabledraw();
 
         if (typeof config["success"] == 'function') {
@@ -185,7 +187,7 @@
         if (totalnumrows) {
             tf += "<tfoot><tr><td colspan=\"" + numcol + "\"><div id=\"buttons\">" + codebtn + "</div></td></tr>\n<tr><td colspan=\"" + numcol + "\">Gesamtergebnisse: " + totalnumrows + "</td></tr>\n</tfoot>";
         } else {
-            tf += "<tfoot><tr><td colspan=\"" + numcol + "\">Die Tabelle ist leer!</td></tr></tfoot>";
+            tf += "<tfoot><tr><td colspan=\"" + numcol + "\">"+$(obj).data("emptymsg")+"</td></tr></tfoot>";
         }
 
         $(obj).html(hd + dt + tf);

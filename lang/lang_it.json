@@ -15,10 +15,11 @@
             "write_denied": "-Attenzione! Il programma non ha permessi di scrittura sulla cartella: ",
             "alert_msg_1": "Wählen Sie die entsprechenden Spalten der Datenbanktabelle!",
             "alert_msg_2": "Wählen Sie die Spalten der Datenbanktabelle exportiert werden und zeigen neben dem Namen, den Sie die csv zuordnen möchten!",
-            "direction_msg_1":"Import von CSV in die Datenbank",
-            "direction_msg_2":"Export von Datenbank in die CSV-Datei",
-            "need_db_table_select":"Es ist notwendig, um eine DB-Table wählen!",
-            "need_csv_upload":"É necessario caricare il file CSV!"
+            "direction_msg_1":"Importazione da csv a tabella MySql",
+            "direction_msg_2":"Esportazione da database a file csv",
+            "need_db_table_select":"È necessario selezionare una tabella MySql!",
+            "need_csv_upload":"É necessario caricare il file CSV!",
+            "emptymsg": "La tabella è vuota!"
         },
         "error":{
             "login_failed":"Accesso negato!",
@@ -49,6 +50,8 @@
         "button": {
             "upload": "Selezionare il file da caricare",
             "reset": "Reset configurazione",
-            "logout": "Logout"
+            "logout": "Logout",
+            "import": "Importa",
+            "export": "Esporta"
         }
 }

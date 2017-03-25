@@ -37,14 +37,14 @@ $(document).ready(function () {
     var csvtabledata = null;
     var select_html_db = null; //html-code selectbox config assoc.
 
-    var alert_msg_1 = "W&auml;hlen Sie die entsprechenden Spalten der Datenbanktabelle!";
-    var alert_msg_2 = "W&auml;hlen Sie die Spalten der Datenbanktabelle exportiert werden und zeigen neben dem Namen, den Sie die csv zuordnen möchten!";
+    var alert_msg_1 = lang_text["msg"]["alert_msg_1"];
+    var alert_msg_2 = lang_text["msg"]["alert_msg_2"];
 
-    var direction_msg_1 = "Import von CSV in die Datenbank";
-    var direction_msg_2 = "Export von Datenbank in die CSV-Datei";
+    var direction_msg_1 = lang_text["msg"]["direction_msg_1"];
+    var direction_msg_2 = lang_text["msg"]["direction_msg_2"];
 
-    var need_db_table_select = "Es ist notwendig, um eine DB-Table w&auml;hlen!";
-    var need_csv_upload = "Es ist notwendig, um eine CSV-Datei zu laden!";
+    var need_db_table_select = lang_text["msg"]["need_db_table_select"];
+    var need_csv_upload = lang_text["msg"]["need_csv_upload"];
 
     $(".dbtocsv").hide();
 
@@ -255,6 +255,7 @@ $(document).ready(function () {
             'numrowperpage': 10,
             'serverside': true,
             'ajaxpage': "getcontenttable.php",
+            'emptymsg': lang_text["msg"]["emptymsg"],
             'success': function (arr) {
                 dbtabledata = JSON.parse(arr);
             }
@@ -319,7 +320,7 @@ $(document).ready(function () {
 
 
                 html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_1 + "<img src=\"../css/info.png\" title=\"" + alert_msg_1 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
-                html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"import-btn\">Import</button></td></tr></tfoot>";
+                html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"import-btn\">"+lang_text["button"]["import"]+"</button></td></tr></tfoot>";
                 if ($("#uploaded-file-name span").html() == "") {
                     $("#configuration-table").html("");
                     return;  //not csv file uploaded
@@ -331,7 +332,7 @@ $(document).ready(function () {
             } else {  //dbtocsv
 
                 html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_2 + "<img src=\"../css/info.png\" title=\"" + alert_msg_2 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
-                html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"export-btn\">Export</button>\n</tr></td></tfoot>";
+                html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"export-btn\">"+lang_text["button"]["export"]+"</button>\n</tr></td></tfoot>";
                 for (var i = 0; i < dbtabledata["tabheader"].length; i++) {  //db column
                     html_body += "<tr class=\"exp\"><td>" + select_html_db + "</td><td>---></td><td contenteditable=\"true\" class=\"csv-column\" ></td></tr>";
                 }

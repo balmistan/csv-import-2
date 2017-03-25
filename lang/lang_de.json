@@ -18,7 +18,8 @@
             "direction_msg_1":"Import von CSV in die Datenbank",
             "direction_msg_2":"Export von Datenbank in die CSV-Datei",
             "need_db_table_select":"Es ist notwendig, um eine DB-Table wählen!",
-            "need_csv_upload":"Es ist notwendig, um eine CSV-Datei zu laden!"
+            "need_csv_upload":"Es ist notwendig, um eine CSV-Datei zu laden!",
+            "emptymsg": "Die Tabelle ist leer!"
         },
         "error":{
             "login_failed": "Zugriff verweigert!",
@@ -49,6 +50,8 @@
         "button": {
             "upload": "Wälen Sie der CSV-Dateiname zu laden",
             "reset": "Reset-Einstallungen",
-            "logout": "Beenden"
+            "logout": "Beenden",
+            "import": "Import",
+            "export": "Export"
         }
 }
