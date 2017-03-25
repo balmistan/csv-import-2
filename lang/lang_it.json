@@ -9,7 +9,7 @@
                 "autosetting": "Autoconfigurazione",
                 "separator": "Carattere separatore:",
                 "enclosure": "Carattere di incapsulamento:",
-                "charset": "Charset:"
+                "charset": "Charset csv:"
 	},
         "msg": {
             "write_denied": "-Attenzione! Il programma non ha permessi di scrittura sulla cartella: ",
@@ -43,7 +43,8 @@
         },
         "info": {
             "trash": "Svuota l' intera tabella MySql",
-            "info_1": "Nel CSV la prima riga deve essere sempre il nome della colonna."
+            "info_1": "Nel CSV la prima riga deve essere sempre il nome della colonna.",
+            "info_2": "Il Charset è sempre riferito al csv. Il database è sempre considerato UTF-8"
         },
         "button": {
             "upload": "Selezionare il file da caricare",

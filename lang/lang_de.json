@@ -9,7 +9,7 @@
                 "autosetting": "Autokonfiguration",
                 "separator": "Spaltentrenn:",
                 "enclosure": "Kapselung Text:",
-                "charset": "Zeichensatz:"
+                "charset": "CSV-Zeichensatz:"
 	},
         "msg": {
             "write_denied": "-Achtung! Das Programm hat keine Schreibrechte für den Ordner: ",
@@ -43,7 +43,8 @@
         },
         "info": {
             "trash": "leert gesamte Datenbanktabelle",
-            "info_1": "Die erste Zeile der CSV sollte immer die Namen der Spalten enthalten"
+            "info_1": "Die erste Zeile der CSV sollte immer die Namen der Spalten enthalten",
+            "info_2": "Charset bezieht sich immer auf csv. Datenbank muss immer Charset UTF-8"
         }, 
         "button": {
             "upload": "Wälen Sie der CSV-Dateiname zu laden",

@@ -192,20 +192,19 @@ $arr_table_names = $db->getTableNames();
                     } else {
                         echo "<option value=\"ISO-8859-1\">ISO-8859-1</option>";
                     }
-                    ?>
-                    </select>
-                    <img src="../css/info.png" title="Charset bezieht sich immer auf csv. Datenbank muss immer Charset UTF-8" alt="info" class="info-icon" onclick="alert(this.getAttribute('title'))" />
+
+                    echo"</select>
+                    <img src=\"../css/info.png\" title=\"".$info["info_2"]."\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\" />
                     </span>
                     <p></p>
-                    <span class="label dbtocsv">Zeichensatz: UTF-8</span>
-                    </fieldset>
-
-
+                    <span class=\"label dbtocsv\">".$label["charset"]." UTF-8</span>
+                    </fieldset>";
+                    ?>
 
                 </div>
                 <?php
                 echo"<button id=\"reinit-btn\">" . $button["reset"] . "</button>
-                <button id=\"logout-btn\" onclick=\"window.location.href = 'logout.php?lang=".$language."'\">" . $button["logout"] . "</button>";
+                <button id=\"logout-btn\" onclick=\"window.location.href = 'logout.php?lang=" . $language . "'\">" . $button["logout"] . "</button>";
                 ?>
             </div>
 
