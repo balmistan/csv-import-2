@@ -1,5 +1,7 @@
 <?php
 
+$language = "de";  //default language
+
 if(isset($_GET["lang"])){
     switch($_GET["lang"]){
         case "it":

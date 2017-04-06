@@ -7,22 +7,13 @@
 $(document).ready(function () {
 
     var lang_text = Array();
-    
-  /*  $.ajax( "../lang/lang_de.php?json=1" )
-  .done(function(json) {
-    alert(json)
-  })
-*/
-  /*  $.getJSON("../lang/lang_de.php?json=1", function (json) {
-      alert(json)
-    });
-*/
+
     $.ajax({
         dataType: "json",
-        url: "../lang/lang_"+$("#language").val()+".json",
+        url: "../lang/lang_" + $("#language").val() + ".json",
         async: false,
-        success: function (data) { 
-             lang_text = data;
+        success: function (data) {
+            lang_text = data;
             //alert(JSON.stringify(lang_text));
 
         }
@@ -125,7 +116,7 @@ $(document).ready(function () {
         var arr = getAssocCsvDb();
         if (arr["assoc"].length != 0) {
             if (confirm("Achtung! Es wird in die Datenbank geschrieben werden. Vorgehen?")) {
-                var issue = JQUERY4U.sendToServer("save_on_db.php", JSON.stringify(arr));
+                var issue = JQUERY4U.sendToServer("save_on_db.php?lang=" + $("#language").val(), JSON.stringify(arr));
                 if (issue[0] == 1) { //msg from DBMS
                     alert("Fehler! Das DBMS antwortet mit der Nachricht: \"" + issue + "\"");
                 } else if (issue[0] == 0) { //msg from my function
@@ -284,6 +275,7 @@ $(document).ready(function () {
             'numrowperpage': 10,
             'serverside': true,
             'ajaxpage': "csvhandle.php",
+            'emptymsg': lang_text["msg"]["emptymsg"],
             'success': function (arr) {
                 csvtabledata = JSON.parse(arr);
                 $("#charset").val(csvtabledata["info"]["chset"]);
@@ -297,10 +289,11 @@ $(document).ready(function () {
     function getCodeForSelectboxDb() {
         var html = "<select class=\"db_assoc\" onchange=\"JQUERY4U.assocChange() \">\n" +
                 "<option value=\"\">&nbsp;</option>";
-        for (var i = 0; i < dbtabledata["tabheader"].length; i++) {
-            html += "<option value=\"" + dbtabledata["tabheader"][i]["data"] + "\">" + dbtabledata["tabheader"][i]["data"] + "</option>\n";
+        if (dbtabledata) {
+            for (var i = 0; i < dbtabledata["tabheader"].length; i++) {
+                html += "<option value=\"" + dbtabledata["tabheader"][i]["data"] + "\">" + dbtabledata["tabheader"][i]["data"] + "</option>\n";
+            }
         }
-
         html += "</select>";
         return html;
     }
@@ -320,7 +313,7 @@ $(document).ready(function () {
 
 
                 html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_1 + "<img src=\"../css/info.png\" title=\"" + alert_msg_1 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
-                html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"import-btn\">"+lang_text["button"]["import"]+"</button></td></tr></tfoot>";
+                html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"import-btn\">" + lang_text["button"]["import"] + "</button></td></tr></tfoot>";
                 if ($("#uploaded-file-name span").html() == "") {
                     $("#configuration-table").html("");
                     return;  //not csv file uploaded
@@ -332,9 +325,11 @@ $(document).ready(function () {
             } else {  //dbtocsv
 
                 html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_2 + "<img src=\"../css/info.png\" title=\"" + alert_msg_2 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
-                html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"export-btn\">"+lang_text["button"]["export"]+"</button>\n</tr></td></tfoot>";
-                for (var i = 0; i < dbtabledata["tabheader"].length; i++) {  //db column
-                    html_body += "<tr class=\"exp\"><td>" + select_html_db + "</td><td>---></td><td contenteditable=\"true\" class=\"csv-column\" ></td></tr>";
+                html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"export-btn\">" + lang_text["button"]["export"] + "</button>\n</tr></td></tfoot>";
+                if (dbtabledata) {
+                    for (var i = 0; i < dbtabledata["tabheader"].length; i++) {  //db column
+                        html_body += "<tr class=\"exp\"><td>" + select_html_db + "</td><td>---></td><td contenteditable=\"true\" class=\"csv-column\" ></td></tr>";
+                    }
                 }
             }
 
@@ -421,7 +416,7 @@ $(document).ready(function () {
 //////////////////////////////////////////////////////////////
 
 
- //   $("#dialog").dialog();
+    //   $("#dialog").dialog();
 
 
 });//close $(document).ready...

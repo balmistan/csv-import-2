@@ -2,6 +2,8 @@
 
 ini_set('auto_detect_line_endings', true);
 
+require_once '../pages/debug.php';
+
 class csv {
 
     private $Filename;
@@ -14,6 +16,7 @@ class csv {
     private $SeparatorList;
     private $EnclosureList;
     private $Limit;
+    private $UseLimit;
     private $Start;
 
     // $limit = "" means unlimited 
@@ -24,6 +27,7 @@ class csv {
         $this->Enclosure = $enclosure;
         $this->ArrCSV = array("tabheader" => array(), "tabcontent" => array());
         $this->Limit = intval($limit);
+        $this->UseLimit = ($limit=="") ? 0 : 1;
         $this->Start = intval($start);
     }
 
@@ -40,33 +44,42 @@ class csv {
                 $this->ArrCSV["tabheader"][] = array("title" => $title);
             }
 
-
             while (($arr_row = fgetcsv($fp, 0, $this->Separator, $this->Enclosure)) !== false) { //false means end of file for exemple
+            
                 if ($arr_row === null) {  //an error occurred 
+                    debug("1");
                     break;
                 }
 
                 if (count($arr_row) == 1 && $arr_row[0] === null) { //an empty row
+                    debug("2");
                     continue;
                 }
 
                 $rowcount++;
 
                 if ($rowcount <= $this->Start) {
+                    debug("3");
                     continue;
                 }
 
-                if ($rowcount > $this->Start + $this->Limit) {
+                if ($this->UseLimit && ($rowcount > $this->Start + $this->Limit)) {
+                    debug("4");
                     continue;
                 }
 
                 // $this->ArrCSV["data"][] = implode("-", $arr_row);
                 //$this->ArrCSV["data"][] = array_combine($this->ArrCSV["tabheader"], $arr_row);
                 $this->ArrCSV["tabcontent"][] = $arr_row;
+                debug($arr_row);
+                
             }//while close
 
             $this->ArrCSV["numrows"] = $rowcount;
             fclose($fp);
+            //debug($this->ArrCSV["tabcontent"]);
+        }else{
+            debug("impossibile aprire il file: ".$this->Filename);
         }
     }
 
