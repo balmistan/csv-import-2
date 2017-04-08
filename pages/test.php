@@ -1,42 +1,18 @@
 <?php
-
-session_start();
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-require_once "../class/db.class.php";
-require_once 'debug.php';
+echo"
+<!DOCTYPE html>
+<html>
+<body>";
 
 
-if (!isset($_SESSION["islogged"])) {
-    die();
-}
+$a1=array("a"=>"red","b"=>"green","c"=>"blue");
+$a2=array("a"=>"red","b"=>"blue","c"=>"green");
 
-/*
-$db = new db();
+$result=array_diff_assoc($a1,$a2);
+print_r($result);
 
-
-$ret_var = $db->getContentTable("comuni", "*", 5);
-
-
-echo (json_encode($ret_var));
-*/
+echo"</body>
+</html>";
 
 
-$page = file_get_contents("../lang/lang_de");
-$json_output = json_decode($page, true);
-
-
-
-$arr_1 = array();
-$arr_1["login"] = array();
-$arr_1["login"]["dbname"] = "DB Name";
-$arr_1["login"]["server"] = "Server";
-
-echo json_encode($arr_1);
-
-
+?>

@@ -1,5 +1,7 @@
 <?php
 
+require_once '../pages/debug.php';
+
 class db {
 
     private $conn;
@@ -35,9 +37,8 @@ class db {
             ));
 
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
+
             $this->setDB($this->dbname);
-            
         } catch (PDOException $e) {
             $this->conn = NULL;
             $this->error = $e->getMessage();
@@ -123,7 +124,7 @@ class db {
 
             $query = "INSERT INTO " . $table_name . " (" . $columns . ") VALUES (" . $str_values . ")";
 
-           // $str_debug .= "\$sql = \$this->conn->prepare(" . $query . ");\n";
+            // $str_debug .= "\$sql = \$this->conn->prepare(" . $query . ");\n";
 
 
 
@@ -137,11 +138,11 @@ class db {
                     $count = 1;
                     foreach ($arr_csv_index as $csv_index) {
                         $sql->bindValue($count, $arrval[$csv_index]);
-                     //   $str_debug .= "\$sql->bindValue(" . $count . ", '" . $arrval[$csv_index] . "');\n<br />";
+                        //   $str_debug .= "\$sql->bindValue(" . $count . ", '" . $arrval[$csv_index] . "');\n<br />";
                         $count++;
                     }
                     $sql->execute();
-             //       $str_debug .= "\$sql->execute();\n<br />";
+                    //       $str_debug .= "\$sql->execute();\n<br />";
                 }
 
 
@@ -154,22 +155,22 @@ class db {
         return $issue;
     }
 
-    public function getContentTable($table_name, $columnnames = "*", $start=0, $numrows = "") {
+    public function getContentTable($table_name, $columnnames = "*", $start = 0, $numrows = "") {
 
-        $limit = ($numrows == "") ? "" : " limit " .intval($start) . "," . $numrows;
-        
+        $limit = ($numrows == "") ? "" : " limit " . intval($start) . "," . $numrows;
+
         $temp = array();
         $arr_issue = array();
-        
+
         //get columns names:
-        
+
         $arr_issue["tabheader"] = $this->getColumnsName($table_name);
 
         try {
             $sql = $this->conn->prepare("SELECT " . $columnnames . " FROM " . $table_name . $limit);
             $sql->execute();
 
-            
+
             //    $temp = $this->getColumnsName($table_name);
             //    $temp["data"] = array();
 
@@ -180,24 +181,21 @@ class db {
         } catch (PDOException $er) {
             
         }
-        
+
         $arr_issue["tabcontent"] = $temp;
-        
+
         //get the total number of rows
-        
-        try{
-             $sql = $this->conn->prepare("SELECT COUNT(*) FROM ". $table_name);
-             $sql->execute();
-             $arr_issue["numrows"] = $sql->fetchColumn(0);
-             
-        }catch (PDOException $er) {
+
+        try {
+            $sql = $this->conn->prepare("SELECT COUNT(*) FROM " . $table_name);
+            $sql->execute();
+            $arr_issue["numrows"] = $sql->fetchColumn(0);
+        } catch (PDOException $er) {
             
         }
 
         return $arr_issue;
     }
-    
-    
 
     public function truncateTable($tablename) {
         //Our SQL statement. This will empty / truncate the table $tablename
@@ -224,6 +222,52 @@ class db {
             }
         }
         return $issue;
+    }
+
+    public function dbcheck($tablename, $arr_assoc, $arr_csv, $start = 0, $numrows = "") {
+
+        $columnames = "";
+        $assoc_key_index = array();
+
+//debug($arr_csv);
+
+        foreach ($arr_assoc as $value) {
+            $columnames .= $value["dbcolumnname"] . ",";
+            $assoc_key_index[$value["dbcolumnname"]] = $value["csvindex"];  //used for reolacing names MySql column with csv column index.
+        }
+
+        // debug($assoc_key_index);
+        //remove last comma
+
+        $columnames = substr($columnames, 0, strlen($columnames) - 1);  //for query
+        // debug($columnames);
+
+        $arr_issue = $this->getContentTable($tablename, $columnames, $start, $numrows);
+        
+        //debug($arr_issue);
+
+        $newarray = array();
+
+        for ($i = 0; $i < count($arr_issue["tabcontent"], 0); $i++) {
+            $newarray[$i] = array();
+            foreach ($arr_issue["tabcontent"][$i] as $key => $value) {
+                $newarray[$i][$assoc_key_index[$key]] = $value;
+            }
+        }
+        
+        
+        
+       $count=0;
+       
+       while(isset($arr_csv["tabcontent"][$count])&& isset($newarray[$count])){
+           
+           debug("csv:");
+           debug( array_intersect_key($arr_csv["tabcontent"][$count], $newarray[$count]) );
+           debug("MySql:");
+           debug($newarray[$count]);
+           
+           $count++;
+       }
     }
 
 }

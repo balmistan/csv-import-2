@@ -47,31 +47,31 @@ class csv {
             while (($arr_row = fgetcsv($fp, 0, $this->Separator, $this->Enclosure)) !== false) { //false means end of file for exemple
             
                 if ($arr_row === null) {  //an error occurred 
-                    debug("1");
+                   
                     break;
                 }
 
                 if (count($arr_row) == 1 && $arr_row[0] === null) { //an empty row
-                    debug("2");
+                    
                     continue;
                 }
 
                 $rowcount++;
 
                 if ($rowcount <= $this->Start) {
-                    debug("3");
+                  
                     continue;
                 }
 
                 if ($this->UseLimit && ($rowcount > $this->Start + $this->Limit)) {
-                    debug("4");
+                    
                     continue;
                 }
 
                 // $this->ArrCSV["data"][] = implode("-", $arr_row);
                 //$this->ArrCSV["data"][] = array_combine($this->ArrCSV["tabheader"], $arr_row);
                 $this->ArrCSV["tabcontent"][] = $arr_row;
-                debug($arr_row);
+              
                 
             }//while close
 

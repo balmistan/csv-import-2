@@ -54,5 +54,6 @@ if (0) {
 
 $issue = $db->insert($_SESSION["info"]["tablename"], $arr_in["assoc"], $arr_csv);
 
+$db->dbcheck($_SESSION["info"]["tablename"], $arr_in["assoc"], $arr_csv);
 
 echo json_encode($issue);
