@@ -243,7 +243,7 @@ class db {
         // debug($columnames);
 
         $arr_issue = $this->getContentTable($tablename, $columnames, $start, $numrows);
-        
+
         //debug($arr_issue);
 
         $newarray = array();
@@ -254,20 +254,35 @@ class db {
                 $newarray[$i][$assoc_key_index[$key]] = $value;
             }
         }
-        
-        
-        
-       $count=0;
-       
-       while(isset($arr_csv["tabcontent"][$count])&& isset($newarray[$count])){
-           
-           debug("csv:");
-           debug( array_intersect_key($arr_csv["tabcontent"][$count], $newarray[$count]) );
-           debug("MySql:");
-           debug($newarray[$count]);
-           
-           $count++;
-       }
+
+
+
+        $count = 0;
+
+        while (isset($arr_csv["tabcontent"][$count]) && isset($newarray[$count])) {
+            /*
+              debug("csv:");
+              debug( array_intersect_key($arr_csv["tabcontent"][$count], $newarray[$count]) );
+              debug("MySql:");
+              debug($newarray[$count]);
+             */
+
+            if (count($result = array_diff_assoc(
+                            array_intersect_key($arr_csv["tabcontent"][$count], $newarray[$count]), //CSV
+                            $newarray[$count]     //Mysql Table
+                    ))) {
+                debug("Row: " . $count+1);
+                debug("Error:");
+                debug("csv:");
+                debug(array_intersect_key($arr_csv["tabcontent"][$count], $newarray[$count]));
+                debug("MySql:");
+                debug($newarray[$count]);
+                debug("diff:");
+                debug($result);
+            }
+
+            $count++;
+        }
     }
 
 }
