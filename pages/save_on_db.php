@@ -7,7 +7,9 @@ require_once "../class/csv.class.php";
 require_once 'language_read.php';
 require_once "separator_list.php";
 require_once 'debug.php';
-
+require_once"../class/excelconvert.class.php";
+require_once '../class/PHPExcel/Classes/PHPExcel.php';
+require_once '../class/PHPExcel/Classes/PHPExcel/IOFactory.php';
 
 if (!isset($_SESSION["islogged"])) {
     die();
@@ -54,6 +56,19 @@ if (0) {
 
 $issue = $db->insert($_SESSION["info"]["tablename"], $arr_in["assoc"], $arr_csv);
 
-$db->dbcheck($_SESSION["info"]["tablename"], $arr_in["assoc"], $arr_csv);
+$arr_check = $db->dbcheck($_SESSION["info"]["tablename"], $arr_in["assoc"], $arr_csv);
+
+
+if(1){
+    
+    //debug($arr_check);
+    
+    $excel = new excelconvert($arr_in["assoc"], $arr_check);
+    
+    $excel->Save("../uploads/Fehler.xls");
+}
+
+
+
 
 echo json_encode($issue);

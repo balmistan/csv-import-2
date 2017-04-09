@@ -244,7 +244,7 @@ class db {
 
         $arr_issue = $this->getContentTable($tablename, $columnames, $start, $numrows);
 
-        //debug($arr_issue);
+        //debug($arr_assoc);
 
         $newarray = array();
 
@@ -258,6 +258,8 @@ class db {
 
 
         $count = 0;
+        
+        $arr_check = array();
 
         while (isset($arr_csv["tabcontent"][$count]) && isset($newarray[$count])) {
             /*
@@ -271,6 +273,16 @@ class db {
                             array_intersect_key($arr_csv["tabcontent"][$count], $newarray[$count]), //CSV
                             $newarray[$count]     //Mysql Table
                     ))) {
+                
+                $arr_check[$count+1] = array();      //index is num row Mysql. es is always >=1
+                
+                $arr_check[$count+1]["csv"] = array_intersect_key($arr_csv["tabcontent"][$count], $newarray[$count]);
+                
+                $arr_check[$count+1]["mysql"] = $newarray[$count];
+                
+                $arr_check[$count+1]["mysqlerr"] = $result;
+                
+                /*
                 debug("Row: " . $count+1);
                 debug("Error:");
                 debug("csv:");
@@ -279,10 +291,12 @@ class db {
                 debug($newarray[$count]);
                 debug("diff:");
                 debug($result);
+                */
             }
 
             $count++;
         }
+        return $arr_check;
     }
 
 }
