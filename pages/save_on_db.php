@@ -56,16 +56,18 @@ if (0) {
 
 $issue = $db->insert($_SESSION["info"]["tablename"], $arr_in["assoc"], $arr_csv);
 
+if($issue[0]==1){ //on success
+
 $arr_check = $db->dbcheck($_SESSION["info"]["tablename"], $arr_in["assoc"], $arr_csv);
+}
 
-
-if(1){
-    
-    //debug($arr_check);
-    
+if(count($arr_check)){  
+ 
     $excel = new excelconvert($arr_in["assoc"], $arr_check);
     
     $excel->Save("../uploads/Fehler.xls");
+    
+    $issue[0] = 3;   //3 = error + creating differences files
 }
 
 

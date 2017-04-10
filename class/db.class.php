@@ -146,9 +146,9 @@ class db {
                 }
 
 
-                $issue = array(0, $this->conn->commit(), $str_debug);   //0= msg from my function (true= success, false=error.)
+                $issue = array(1, $this->conn->commit(), $str_debug);   //1= success
             } catch (PDOException $er) {
-                $issue = array(1, $er->getMessage(), $str_debug);      //1= msg from DBMS
+                $issue = array(2, $er->getMessage(), $str_debug);      //2= Error + msg from DBMS  
                 $this->conn->rollBack();
             }
         }

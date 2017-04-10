@@ -112,29 +112,41 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '#import-btn', function () {
-
+        $("#show_diff_file").hide();
         var arr = getAssocCsvDb();
         if (arr["assoc"].length != 0) {
             if (confirm("Achtung! Es wird in die Datenbank geschrieben werden. Vorgehen?")) {
                 var issue = JQUERY4U.sendToServer("save_on_db.php?lang=" + $("#language").val(), JSON.stringify(arr));
-                if (issue[0] == 1) { //msg from DBMS
-                    alert("Fehler! Das DBMS antwortet mit der Nachricht: \"" + issue + "\"");
-                } else if (issue[0] == 0) { //msg from my function
-                    if (issue[1] == true) {
-                        dbtabledata = null;
-                        show_db_preview();
-                        alert("Erfolg!")
-                    } else {
-                        alert("Fehler! " + issue[1]);
-                    }
+
+                var msg = "";
+                switch (issue[0]) {
+                    case 0:
+                        msg = "keine data zu laden";
+                        break;
+                    case 1:
+                        msg = "Erfolg!";
+                        break;
+                    case 2:
+                        msg = "Fehler! Das DBMS antwortet mit der Nachricht: \"" + issue[1] + "\""; //msg from DBMS
+                        break;
+                    case 3:
+                        msg = "Gespeicherte Daten falsch. beobachtete Fehlerdatei klicken auf den Button Fehler-Datei!";
+                        $("#show_diff_file").show();
+                        break;
+                    default:
+                        break;
                 }
+                
+                alert(msg)
             }
-        } else {
-            alert(alert_msg_1)
         }
 
     });
 
+
+    $("#show_diff_file").click(function(){
+        document.location = "wrapper.php?filename=Fehler.xls";
+    });
 
     $(document).on('click', '#export-btn', function () {
         var arr = getAssocCsvDb();
@@ -318,10 +330,15 @@ $(document).ready(function () {
                     $("#configuration-table").html("");
                     return;  //not csv file uploaded
                 }
+                
+                if(csvtabledata){ //if not null
+                   
                 for (var i = 0; i < csvtabledata["tabheader"].length; i++) { //csv column
                     html_body += "<tr><td class=\"csv-column\">" + csvtabledata["tabheader"][i]["title"] + "</td><td>---></td><td>" + select_html_db + "</td><tr>\n";
                 }
-
+                }else{
+                     show_msg("Es ist notwendig eine CSV-Datei hochladen!");
+                }
             } else {  //dbtocsv
 
                 html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_2 + "<img src=\"../css/info.png\" title=\"" + alert_msg_2 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";

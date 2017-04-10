@@ -264,6 +264,7 @@ $arr_table_names = $db->getTableNames();
 
             </div>
             <!-- <div id="debug-div"></div>-->
+            <button id="show_diff_file">Fehler-Datei</button>
         </div>
 
         <div id="dialog" title="Basic dialog">

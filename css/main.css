@@ -225,3 +225,7 @@ z-index: 1000;
     margin-top:10px;
 }
 
+#show_diff_file{
+    display: none;
+}
+

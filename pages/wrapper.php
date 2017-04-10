@@ -9,8 +9,10 @@ if (!isset($_SESSION["islogged"])) {
     die();
 }
 
-if (isset($_SESSION["csvexportedfilename"])) {
-    $file = "../uploads/" . $_SESSION["csvexportedfilename"];
+$filename = isset($_GET["filename"]) ? htmlentities($_GET["filename"]) : $_SESSION["csvexportedfilename"];
+
+
+    $file = "../uploads/" . $filename;
     if (file_exists($file)) {
         header('Content-Description: File Transfer');
         header('Content-Type: text/csv');
@@ -22,5 +24,5 @@ if (isset($_SESSION["csvexportedfilename"])) {
         readfile($file);
         exit;
     }
-}
+
 ?>
