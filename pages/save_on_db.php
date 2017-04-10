@@ -62,6 +62,8 @@ $arr_check = $db->dbcheck($_SESSION["info"]["tablename"], $arr_in["assoc"], $arr
 }
 
 if(count($arr_check)){  
+    
+    debug($arr_check);
  
     $excel = new excelconvert($arr_in["assoc"], $arr_check);
     

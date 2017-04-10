@@ -73,6 +73,18 @@ class excelconvert {
             //colour set
 
             $startcolumn_arr_index = $this->col_start;
+            
+            for($ind=0; $ind<count($arr_values["mysqlerr"]); $ind++) {
+               
+                $objk->getStyle($this->ArrColumns[$startcolumn_arr_index+(3*$ind)]  . $startrow)
+                        ->getFill()
+                        ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                        ->getStartColor()
+                        ->setRGB('FF0000');     //Mysql colour
+               
+            }
+            
+            /*
             foreach ($arr_values["mysqlerr"] as $ind => $value) {
                
                 $objk->getStyle($this->ArrColumns[$startcolumn_arr_index+(3*$ind)]  . $startrow)
@@ -80,9 +92,9 @@ class excelconvert {
                         ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                         ->getStartColor()
                         ->setRGB('FF0000');     //Mysql colour
-                //$startcolumn_arr_index +=3;
+               
             }
-
+*/
 
             $startrow++;
         }
