@@ -242,7 +242,9 @@ class db {
         $columnames = substr($columnames, 0, strlen($columnames) - 1);  //for query
         // debug($columnames);
 
-        $arr_issue = $this->getContentTable($tablename, $columnames, $start, $numrows);
+        //$arr_issue = $this->getContentTable($tablename, $columnames, $start, $numrows);
+        
+        $arr_issue = $this->getContentTable($tablename, "*", $start, $numrows);
 
         //debug($arr_assoc);
 

@@ -40,13 +40,23 @@ class excelconvert {
         $startcolumn_arr_index = $this->col_start;
         $startrow = $this->row_start;
 
+        /*
+          foreach ($arr_assoc as $key => $arr_value) {
+          $objk->
+          //column names setting
+          setCellValue($this->ArrColumns[$startcolumn_arr_index] . "2", $arr_value["dbcolumnname"])->
+          setCellValue($this->ArrColumns[$startcolumn_arr_index + 1] . "2", $arr_value["csvcolumnname"]);
+          $startcolumn_arr_index +=3;
+          }
+         */
+
         foreach ($arr_assoc as $key => $arr_value) {
             $objk->
                     //column names setting
-                    setCellValue($this->ArrColumns[$startcolumn_arr_index] . "2", $arr_value["dbcolumnname"])->
-                    setCellValue($this->ArrColumns[$startcolumn_arr_index + 1] . "2", $arr_value["csvcolumnname"]);
-            $startcolumn_arr_index +=3;
+                    setCellValue($this->ArrColumns[$startcolumn_arr_index+(3*$arr_value["csvindex"])] . "2", $arr_value["dbcolumnname"])->
+                    setCellValue($this->ArrColumns[$startcolumn_arr_index +(3*$arr_value["csvindex"])+ 1] . "2", $arr_value["csvcolumnname"]);
         }
+
 
         //content table setting
 
@@ -73,28 +83,27 @@ class excelconvert {
             //colour set
 
             $startcolumn_arr_index = $this->col_start;
-            
-            for($ind=0; $ind<count($arr_values["mysqlerr"]); $ind++) {
-               
-                $objk->getStyle($this->ArrColumns[$startcolumn_arr_index+(3*$ind)]  . $startrow)
-                        ->getFill()
-                        ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
-                        ->getStartColor()
-                        ->setRGB('FF0000');     //Mysql colour
-               
-            }
-            
             /*
+              for($ind=0; $ind<count($arr_values["mysqlerr"]); $ind++) {
+
+              $objk->getStyle($this->ArrColumns[$startcolumn_arr_index+(3*$ind)]  . $startrow)
+              ->getFill()
+              ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+              ->getStartColor()
+              ->setRGB('FF0000');     //Mysql colour
+
+              }
+             */
+
             foreach ($arr_values["mysqlerr"] as $ind => $value) {
-               
-                $objk->getStyle($this->ArrColumns[$startcolumn_arr_index+(3*$ind)]  . $startrow)
+
+                $objk->getStyle($this->ArrColumns[$startcolumn_arr_index + (3 * $ind)] . $startrow)
                         ->getFill()
                         ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                         ->getStartColor()
                         ->setRGB('FF0000');     //Mysql colour
-               
             }
-*/
+
 
             $startrow++;
         }

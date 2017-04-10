@@ -5,6 +5,8 @@
  */
 
 $(document).ready(function () {
+    
+    resetfunc(); //delete SESSION parameters
 
     var lang_text = Array();
 
@@ -45,9 +47,14 @@ $(document).ready(function () {
 
     //It does everything as it was immediately after login
     $("#reinit-btn").click(function () {
-        JQUERY4U.sendToServer("init.php"); //reset all settings parameters saved in session 
+        resetfunc();
         location.reload();
     });
+    
+    function resetfunc(){
+        JQUERY4U.sendToServer("init.php"); //reset all settings parameters saved in session 
+        
+    }
 
     $("#select-mysql-table").change(function () {
         dbtabledata = null;
@@ -125,6 +132,7 @@ $(document).ready(function () {
                         break;
                     case 1:
                         msg = "Erfolg!";
+                       show_db_preview();
                         break;
                     case 2:
                         msg = "Fehler! Das DBMS antwortet mit der Nachricht: \"" + issue[1] + "\""; //msg from DBMS

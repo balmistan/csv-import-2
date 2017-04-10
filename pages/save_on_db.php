@@ -30,29 +30,6 @@ $csv = new csv("../uploads/" . $_SESSION["info"]["fnup"], //csv file link
 $arr_csv = $csv->getArrCsv();
 
 
-if (0) {
-    debug("session-info:");
-    debug($separator_list[$_SESSION["info"]["sep"]][1]);
-    debug($enclosure_list[$_SESSION["info"]["encl"]][1]);
-    debug($_SESSION["info"]["chset"]);
-}
-
-if (0) {
-    debug("arr_csv:");
-    debug($arr_csv);
-}
-
-
-
-if (0) {
-    debug("tablename:");
-    debug($_SESSION["info"]["tablename"]);
-
-    debug("assoc:");
-
-    debug($arr_in["assoc"]);
-}
-
 
 $issue = $db->insert($_SESSION["info"]["tablename"], $arr_in["assoc"], $arr_csv);
 
@@ -62,8 +39,6 @@ $arr_check = $db->dbcheck($_SESSION["info"]["tablename"], $arr_in["assoc"], $arr
 }
 
 if(count($arr_check)){  
-    
-    debug($arr_check);
  
     $excel = new excelconvert($arr_in["assoc"], $arr_check);
     
@@ -71,8 +46,5 @@ if(count($arr_check)){
     
     $issue[0] = 3;   //3 = error + creating differences files
 }
-
-
-
 
 echo json_encode($issue);
