@@ -48,6 +48,22 @@ $db = new db();
 
 $arr_table_names = $db->getTableNames();
 
+function maxsizeupload_bytes() {
+    $val = trim(ini_get('upload_max_filesize'));
+    $last = strtolower($val[strlen($val)-1]);
+    switch($last) {
+        // The 'G' modifier is available since PHP 5.1.0
+        case 'g':
+            $val *= 1024;
+        case 'm':
+            $val *= 1024;
+        case 'k':
+            $val *= 1024;
+    }
+
+    return $val;
+}
+
 //echo "<br />".$optid."<br />";
 ?>
 
@@ -272,6 +288,7 @@ $arr_table_names = $db->getTableNames();
         </div>
         <?php
         echo "<input type=\"hidden\" id=\"language\" value=\"" . $language . "\" />";
+        echo "<input type=\"hidden\" id=\"max_upload_size\" value=\"" . maxsizeupload_bytes() . "\" />";
         ?>
     </body>
 </html>

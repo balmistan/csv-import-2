@@ -407,9 +407,10 @@ $(document).ready(function () {
     }
 
 ////////////////// BLOCKS /////////////////////////////////////
+
     $("#fileuploader").uploadFile({
         url: "upload.php",
-        maxFileSize: 2097152, //2 MB
+        maxFileSize: $("#max_upload_size").val(), 
         sizeErrorStr: lang_text["error"]["upload_error"],
         dragDrop: false,
         fileName: "myfile",
