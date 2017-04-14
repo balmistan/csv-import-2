@@ -4,7 +4,7 @@ AddCharset UTF-8 .html
 
 php_value post_max_size 150M
 php_value upload_max_filesize 150M
-php_value memory_limit 512M
+php_value memory_limit 1024M
 php_value max_execution_time 180
 
 #Redirect errors to file
@@ -13,8 +13,8 @@ php_value max_execution_time 180
 #php_flag display_errors off
 #php_flag html_errors off
 
-#php_flag log_errors on  
-#php_value error_log ../logs/php_error.log 
+php_flag log_errors on  
+php_value error_log ../logs/php_error.log 
 
 #protection php error.log from direct access.
 #<Files logs/php_error.log>  

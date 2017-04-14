@@ -19,3 +19,8 @@
         fclose($fp);
     }
 }
+
+
+function exectime($time_start, $time_end){
+    debug('Total Execution Time:' . ($time_end - $time_start) . ' sec');
+}

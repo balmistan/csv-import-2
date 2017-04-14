@@ -64,6 +64,7 @@ if (isset($_FILES["myfile"])) {
     }
 
     $_SESSION["info"]["fnup"] = $fileName;
+    $_SESSION["info"]["csvnumrows"] = -1;
 
     echo json_encode($ret);
 }

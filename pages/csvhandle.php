@@ -13,6 +13,8 @@ if (!isset($_SESSION["islogged"])) {
     die();
 }
 
+//$start = microtime(1);
+
 $arr_in = json_decode(file_get_contents('php://input'), true);
 
 
@@ -39,6 +41,15 @@ if($_SESSION["info"]["autoconf"]=="1"){
 
 $ret = array();
 
+
+$getnumrows = false;
+
+if($_SESSION["info"]["csvnumrows"] == -1){
+    $getnumrows = true;
+}
+
+
+
 $csv = new csv("../uploads/" . $_SESSION["info"]["fnup"], //csv file link
         $separator_list[$_SESSION["info"]["sep"]][1], 
         $enclosure_list[$_SESSION["info"]["encl"]][1], 
@@ -48,10 +59,25 @@ $csv = new csv("../uploads/" . $_SESSION["info"]["fnup"], //csv file link
 
 //debug($_SESSION["info"]);
 
-$csvcontent = $csv->getArrCsv();
+$csvcontent = $csv->getArrCsv($getnumrows);
+
+
+if($getnumrows){
+    $_SESSION["info"]["csvnumrows"] = $csvcontent["numrows"];
+}else{
+    $csvcontent["numrows"] = $_SESSION["info"]["csvnumrows"];
+}
+
+
 
 //debug($csvcontent);
 
 $csvcontent["info"] = $_SESSION["info"];
+
+
+
+
+//$end = microtime(1);
+//exectime($start, $end);
 
 echo json_encode($csvcontent);

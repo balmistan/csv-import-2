@@ -31,7 +31,8 @@ class csv {
         $this->Start = intval($start);
     }
 
-    private function setArrCSV() {
+    private function setArrCSV($getnumrows) {
+        
         $rowcount = 0;
 
         if ($fp = fopen($this->Filename, "r")) {
@@ -65,6 +66,10 @@ class csv {
 
                 if ($this->UseLimit && ($rowcount > $this->Start + $this->Limit)) {
                     
+                    if(!$getnumrows){
+                        break;
+                    }
+                    
                     continue;
                 }
 
@@ -93,8 +98,8 @@ class csv {
         }
     }
 
-    public function getArrCsv() {
-        $this->setArrCSV();
+    public function getArrCsv($getnumrows) {
+        $this->setArrCSV($getnumrows);
         $this->converter();
         return $this->ArrCSV;
     }

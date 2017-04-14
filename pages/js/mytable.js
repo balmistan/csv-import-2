@@ -80,6 +80,7 @@
 
 
     function tabledraw_clientside() {
+        console.time("concatenation");
         var hd = "<thead>";
         var dt = "<tbody>";
 
@@ -189,6 +190,7 @@
         } else {
             tf += "<tfoot><tr><td colspan=\"" + numcol + "\">"+$(obj).data("emptymsg")+"</td></tr></tfoot>";
         }
+console.time("concatenation");
 
         $(obj).html(hd + dt + tf);
         return;
