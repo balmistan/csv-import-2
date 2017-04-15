@@ -60,9 +60,7 @@ $(document).ready(function () {
         dbtabledata = null;
         saveConf();
         show_db_preview();
-        if ($(this).val() != "" && ($("#uploaded-file-name").html() != "" || $("input[name='radio_inp_exp']:checked").val() === "db_csv")) {
-            show_config_table();
-        }
+        show_config_table();
     });
 
     $("#autoconf").click(function () {
@@ -233,7 +231,7 @@ $(document).ready(function () {
 
     function show_msg(msg) {
 
-        $("#info-msg").html(msg).removeAttr('style').fadeOut(10000);
+        $("#info-msg").html(msg).removeAttr('style').fadeOut(15000);
     }
 
 
@@ -276,7 +274,7 @@ $(document).ready(function () {
 
     function show_csv_preview() {
 
-        if ($("input[name='radio_inp_exp']:checked").val() === "dbtocsv") {
+        if (get_direction() === "dbtocsv") {
             $("#mytable").empty();
             return;
         }
@@ -317,58 +315,58 @@ $(document).ready(function () {
 
     function show_config_table() {
         $("#wait-icon").show();
-        if ($("#select-mysql-table").val() != "") {  //no mysqltable selected or not csv uploaded  
-
-            var html_header = "";
-            var html_body = "";
-            var html_footer = "";
-            select_html_db = getCodeForSelectboxDb();
-
-            if ($('input:radio[name=radio_inp_exp]:checked').val() == "csvtodb") {
+        //check
+        if ($("#select-mysql-table").val() == "" || !dbtabledata) {  //no mysqltable selected
+            show_msg(need_db_table_select);
+            $("#wait-icon").hide();
+            return;
+        }
 
 
+        if (get_direction() == "csvtodb") {
+            if ($("#uploaded-file-name span").html() == "" || !csvtabledata) {
+                show_msg(need_csv_upload);
+                $("#wait-icon").hide();
+                return;
+            }
+        }
+        //show table
 
-                html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_1 + "<img src=\"../css/info.png\" title=\"" + alert_msg_1 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
-                html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"import-btn\">" + lang_text["button"]["import"] + "</button></td></tr></tfoot>";
-                if ($("#uploaded-file-name span").html() == "") {
-                    $("#configuration-table").html("");
-                    return;  //not csv file uploaded
-                }
+        var html_header = "";
+        var html_body = "";
+        var html_footer = "";
+        select_html_db = getCodeForSelectboxDb();
 
-                if (csvtabledata) { //if not null
+        if (get_direction() == "csvtodb") {   //csvtodb
 
-                    for (var i = 0; i < csvtabledata["tabheader"].length; i++) { //csv column
-                        html_body += "<tr><td class=\"csv-column\">" + csvtabledata["tabheader"][i]["title"] + "</td><td>---></td><td>" + select_html_db + "</td><tr>\n";
-                    }
-                } else {
-                    show_msg("Es ist notwendig eine CSV-Datei hochladen!");
-                }
-            } else {  //dbtocsv
+            html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_1 + "<img src=\"../css/info.png\" title=\"" + alert_msg_1 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
+            html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"import-btn\">" + lang_text["button"]["import"] + "</button></td></tr></tfoot>";
 
-                html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_2 + "<img src=\"../css/info.png\" title=\"" + alert_msg_2 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
-                html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"export-btn\">" + lang_text["button"]["export"] + "</button>\n</tr></td></tfoot>";
-                if (dbtabledata) {
-                    for (var i = 0; i < dbtabledata["tabheader"].length; i++) {  //db column
-                        html_body += "<tr class=\"exp\"><td>" + select_html_db + "</td><td>---></td><td contenteditable=\"true\" class=\"csv-column\" ></td></tr>";
-                    }
-                }
+
+            for (var i = 0; i < csvtabledata["tabheader"].length; i++) { //csv column
+                html_body += "<tr><td class=\"csv-column\">" + csvtabledata["tabheader"][i]["title"] + "</td><td>---></td><td>" + select_html_db + "</td><tr>\n";
             }
 
+        } else {  //dbtocsv
 
+            html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_2 + "<img src=\"../css/info.png\" title=\"" + alert_msg_2 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
+            html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"export-btn\">" + lang_text["button"]["export"] + "</button>\n</tr></td></tfoot>";
 
-            $("#configuration-table").html(html_header + html_body + html_footer);
-            //  $(".table-title").css("visibility", "visible");
-        } else {
-            $("#configuration-table").html("");
-            //  $(".table-title").css("visibility", "hidden");
+            for (var i = 0; i < dbtabledata["tabheader"].length; i++) {  //db column
+                html_body += "<tr class=\"exp\"><td>" + select_html_db + "</td><td>---></td><td contenteditable=\"true\" class=\"csv-column\" ></td></tr>";
+            }
+
         }
+
+        $("#configuration-table").html(html_header + html_body + html_footer);
+
         $("#wait-icon").hide();
+
     }
 
 
-
-    function checkbtntest() {
-        if ($("input[name='radio_inp_exp']:checked").val() === "csvtodb") { //inport in db
+    function checkbtntest() { // if radiobtn change
+        if (get_direction() === "csvtodb") { //inport in db  
             $(".csvtodb").show();
             $(".dbtocsv").hide();
 
@@ -395,7 +393,7 @@ $(document).ready(function () {
             $(".csvconf").removeAttr('disabled');
 
             if ($("#select-mysql-table").val() == "") {
-                show_msg("Es ist notwendig, um eine DB-Table w&auml;hlen!");
+                show_msg("Es ist notwendig, um eine DB-Table wählen!");
             } else {
                 show_db_preview();
                 show_config_table();
@@ -428,7 +426,9 @@ $(document).ready(function () {
             $("#uploaded-file-name").find("span").html(data[0]);
             saveConf();
             show_csv_preview();
-            if ($("#select-mysql-table").val() != "" || $("input[name='radio_inp_exp']:checked").val() === "db_csv") {
+            if ($("#select-mysql-table").val() == "") {
+                show_msg(need_db_table_select);
+            } else if (get_direction() === "dbtocsv") {
                 show_config_table();
             }
             $("#wait-icon").hide();
@@ -440,6 +440,13 @@ $(document).ready(function () {
             alert(errMsg)
         }
     });
+
+
+    function get_direction() {
+        // return "dbtocsv" or "csvtodb"
+        //return $("input[name='radio_inp_exp']:checked").val();
+        return "csvtodb";                                         //always return csvtodb. implemented now only export function
+    }
 //////////////////////////////////////////////////////////////
 
 
