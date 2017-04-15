@@ -17,10 +17,10 @@ php_flag log_errors on
 php_value error_log ../logs/php_error.log 
 
 #protection php error.log from direct access.
-#<Files logs/php_error.log>  
-#Order allow,deny  
-#Deny from all  
-#Satisfy All  
-#</Files>  
+<Files logs/php_error.log>  
+Order allow,deny  
+Deny from all  
+Satisfy All  
+</Files>  
 
 

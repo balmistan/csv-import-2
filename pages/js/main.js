@@ -5,7 +5,7 @@
  */
 
 $(document).ready(function () {
-    
+
     resetfunc(); //delete SESSION parameters
 
     var lang_text = Array();
@@ -50,10 +50,10 @@ $(document).ready(function () {
         resetfunc();
         location.reload();
     });
-    
-    function resetfunc(){
+
+    function resetfunc() {
         JQUERY4U.sendToServer("init.php"); //reset all settings parameters saved in session 
-        
+
     }
 
     $("#select-mysql-table").change(function () {
@@ -82,7 +82,7 @@ $(document).ready(function () {
 
 
     $('#div_radio_btn').change(function () {
-        checkbtntest()
+        checkbtntest();
     });
 
     $('input:radio[name=radiopreview]').click(function () {
@@ -132,7 +132,7 @@ $(document).ready(function () {
                         break;
                     case 1:
                         msg = "Erfolg!";
-                       show_db_preview();
+                        show_db_preview();
                         break;
                     case 2:
                         msg = "Fehler! Das DBMS antwortet mit der Nachricht: \"" + issue[1] + "\""; //msg from DBMS
@@ -144,7 +144,7 @@ $(document).ready(function () {
                     default:
                         break;
                 }
-                
+
                 alert(msg)
             }
         }
@@ -152,7 +152,7 @@ $(document).ready(function () {
     });
 
 
-    $("#show_diff_file").click(function(){
+    $("#show_diff_file").click(function () {
         document.location = "wrapper.php?filename=Fehler.xls";
     });
 
@@ -233,7 +233,7 @@ $(document).ready(function () {
 
     function show_msg(msg) {
 
-        $("#info-msg").html(msg).removeAttr('style').fadeOut(5000);
+        $("#info-msg").html(msg).removeAttr('style').fadeOut(10000);
     }
 
 
@@ -256,7 +256,7 @@ $(document).ready(function () {
         //  if (!dbtabledata) {
         //      dbtabledata = JQUERY4U.sendToServer("getcontenttable.php");
         //  }
-
+        $("#wait-icon").show();
         $('input:radio[name=radiopreview]').val(['db']); //set radiobutton for title
 
         $("#mytable").empty();
@@ -271,7 +271,7 @@ $(document).ready(function () {
                 dbtabledata = JSON.parse(arr);
             }
         });
-
+        $("#wait-icon").hide();
     }
 
     function show_csv_preview() {
@@ -281,12 +281,7 @@ $(document).ready(function () {
             return;
         }
 
-        //    if (!csvtabledata) {
-        //        csvtabledata = JQUERY4U.sendToServer("csvhandle.php")
-        //    }
-//alert(csvtabledata["info"]["sep"])
-
-
+        $("#wait-icon").show();
 
         $("#mytable").empty();
 
@@ -303,6 +298,7 @@ $(document).ready(function () {
                 $('input:radio[name=radiopreview]').val(['csv']); //set radiobutton for title
             }
         });
+        $("#wait-icon").hide();
     }
 
 
@@ -320,7 +316,7 @@ $(document).ready(function () {
 
 
     function show_config_table() {
-
+        $("#wait-icon").show();
         if ($("#select-mysql-table").val() != "") {  //no mysqltable selected or not csv uploaded  
 
             var html_header = "";
@@ -338,14 +334,14 @@ $(document).ready(function () {
                     $("#configuration-table").html("");
                     return;  //not csv file uploaded
                 }
-                
-                if(csvtabledata){ //if not null
-                   
-                for (var i = 0; i < csvtabledata["tabheader"].length; i++) { //csv column
-                    html_body += "<tr><td class=\"csv-column\">" + csvtabledata["tabheader"][i]["title"] + "</td><td>---></td><td>" + select_html_db + "</td><tr>\n";
-                }
-                }else{
-                     show_msg("Es ist notwendig eine CSV-Datei hochladen!");
+
+                if (csvtabledata) { //if not null
+
+                    for (var i = 0; i < csvtabledata["tabheader"].length; i++) { //csv column
+                        html_body += "<tr><td class=\"csv-column\">" + csvtabledata["tabheader"][i]["title"] + "</td><td>---></td><td>" + select_html_db + "</td><tr>\n";
+                    }
+                } else {
+                    show_msg("Es ist notwendig eine CSV-Datei hochladen!");
                 }
             } else {  //dbtocsv
 
@@ -366,6 +362,7 @@ $(document).ready(function () {
             $("#configuration-table").html("");
             //  $(".table-title").css("visibility", "hidden");
         }
+        $("#wait-icon").hide();
     }
 
 
@@ -410,7 +407,7 @@ $(document).ready(function () {
 
     $("#fileuploader").uploadFile({
         url: "upload.php",
-        maxFileSize: $("#max_upload_size").val(), 
+        maxFileSize: $("#max_upload_size").val(),
         sizeErrorStr: lang_text["error"]["upload_error"],
         dragDrop: false,
         fileName: "myfile",
@@ -421,6 +418,10 @@ $(document).ready(function () {
         multiple: false,
         acceptFiles: "text/csv, application/zip",
         uploadStr: lang_text["button"]["upload"],
+        onSubmit: function (files)
+        {
+            $("#wait-icon").show();
+        },
         onSuccess: function (files, data, xhr, pd)
         {
             csvtabledata = null;
@@ -430,12 +431,12 @@ $(document).ready(function () {
             if ($("#select-mysql-table").val() != "" || $("input[name='radio_inp_exp']:checked").val() === "db_csv") {
                 show_config_table();
             }
+            $("#wait-icon").hide();
 
         },
         onError: function (files, status, errMsg, pd)
         {
-            //files: list of files
-            //status: error status
+            $("#wait-icon").hide();
             alert(errMsg)
         }
     });
