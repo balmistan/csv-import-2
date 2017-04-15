@@ -2,6 +2,14 @@
 #AddDefaultCharset UTF-8
 AddCharset UTF-8 .html
 
+#redirect https:
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+
 php_value post_max_size 150M
 php_value upload_max_filesize 150M
 php_value memory_limit 1024M
