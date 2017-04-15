@@ -426,13 +426,8 @@ $(document).ready(function () {
             $("#uploaded-file-name").find("span").html(data[0]);
             saveConf();
             show_csv_preview();
-            if ($("#select-mysql-table").val() == "") {
-                show_msg(need_db_table_select);
-            } else if (get_direction() === "dbtocsv") {
-                show_config_table();
-            }
+            show_config_table();
             $("#wait-icon").hide();
-
         },
         onError: function (files, status, errMsg, pd)
         {
