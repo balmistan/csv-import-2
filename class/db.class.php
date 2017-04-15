@@ -99,11 +99,11 @@ class db {
 
     public function insert($table_name, $config_assoc, $csvarray) {
         $issue = array();
+        $arr_debug = array();
 
         if (count($csvarray["tabcontent"]) == 0) {
             $issue = array(0, "Keine data zu laden");   //0=msg from my function
         } else {
-            $str_debug = "";
 
             $columns = "";
 
@@ -124,7 +124,7 @@ class db {
 
             $query = "INSERT INTO " . $table_name . " (" . $columns . ") VALUES (" . $str_values . ")";
 
-            // $str_debug .= "\$sql = \$this->conn->prepare(" . $query . ");\n";
+            //$arr_debug[] = "\$sql = \$this->conn->prepare(" . $query . ");";
 
 
 
@@ -138,17 +138,17 @@ class db {
                     $count = 1;
                     foreach ($arr_csv_index as $csv_index) {
                         $sql->bindValue($count, $arrval[$csv_index]);
-                        //   $str_debug .= "\$sql->bindValue(" . $count . ", '" . $arrval[$csv_index] . "');\n<br />";
+                        //$arr_debug[] = "\$sql->bindValue(" . $count . ", '" . $arrval[$csv_index] . "');";
                         $count++;
                     }
                     $sql->execute();
-                    //       $str_debug .= "\$sql->execute();\n<br />";
+                   //$arr_debug[] = "\$sql->execute();";
                 }
 
 
-                $issue = array(1, $this->conn->commit(), $str_debug);   //1= success
+                $issue = array(1, $this->conn->commit(), $arr_debug);   //1= success
             } catch (PDOException $er) {
-                $issue = array(2, $er->getMessage(), $str_debug);      //2= Error + msg from DBMS  
+                $issue = array(2, $er->getMessage(), $arr_debug);      //2= Error + msg from DBMS  
                 $this->conn->rollBack();
             }
         }

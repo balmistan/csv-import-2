@@ -279,8 +279,9 @@ function maxsizeupload_bytes() {
                 </div>
 
             </div>
-            <!-- <div id="debug-div"></div>-->
+             
             <button id="show_diff_file">Fehler-Datei</button>
+           <!-- <div id="debug-div"></div> -->
         </div>
 
         <div id="dialog" title="Basic dialog">

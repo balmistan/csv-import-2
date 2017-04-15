@@ -142,7 +142,7 @@ $(document).ready(function () {
                     default:
                         break;
                 }
-
+                show_db_preview();
                 alert(msg)
             }
         }
