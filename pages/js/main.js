@@ -265,6 +265,7 @@ $(document).ready(function () {
             'serverside': true,
             'ajaxpage': "getcontenttable.php",
             'emptymsg': lang_text["msg"]["emptymsg"],
+            'totalresultmsg': lang_text["msg"]["totalresultmsg"],
             'success': function (arr) {
                 dbtabledata = JSON.parse(arr);
             }

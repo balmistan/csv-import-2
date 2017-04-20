@@ -279,8 +279,9 @@ function maxsizeupload_bytes() {
                 </div>
 
             </div>
-             
-            <button id="show_diff_file">Fehler-Datei</button>
+            <?php 
+            echo "<button id=\"show_diff_file\">".$button["errorfile"]."</button>";
+            ?>
            <!-- <div id="debug-div"></div> -->
         </div>
 

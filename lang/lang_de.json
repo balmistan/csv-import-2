@@ -19,7 +19,8 @@
             "direction_msg_2":"Export von Datenbank in die CSV-Datei",
             "need_db_table_select":"Es ist notwendig, um eine DB-Table wählen!",
             "need_csv_upload":"Es ist notwendig, um eine CSV-Datei zu laden!",
-            "emptymsg": "Die Tabelle ist leer!"
+            "emptymsg": "Die Tabelle ist leer!",
+            "totalresultmsg": "Gesamtergebnisse:"
         },
         "error":{
             "login_failed": "Zugriff verweigert!",
@@ -52,6 +53,7 @@
             "reset": "Reset-Einstallungen",
             "logout": "Beenden",
             "import": "Import",
-            "export": "Export"
+            "export": "Export",
+            "errorfile": "Fehler-Datei schauen"
         }
 }

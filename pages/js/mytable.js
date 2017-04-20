@@ -15,7 +15,8 @@
             'serverside': false,
             'ajaxpage': '',
             'success': '',
-            'emptymsg': 'The table is empty'
+            'emptymsg': 'The table is empty',
+            'totalresultmsg': 'num rows:'
         };
         if (options)
             $.extend(config, options);
@@ -29,7 +30,8 @@
         $(obj).data("serverside", config["serverside"]);
         $(obj).data("ajaxpage", config["ajaxpage"]);
         $(obj).data("emptymsg", config["emptymsg"]);
-        
+        $(obj).data("totalresultmsg", config["totalresultmsg"]);
+
         tabledraw();
 
         if (typeof config["success"] == 'function') {
@@ -100,14 +102,14 @@
         var totalnumrows = 0;
         var startrow = 0;
         var endrow = 0;
-        if($(obj).data("serverside")){
+        if ($(obj).data("serverside")) {
             startrow = 0;
             endrow = $(obj).data("numrowperpage");
-        }else{
-         startrow = $(obj).data("tablepage") == 1 ? 0 : ($(obj).data("tablepage") - 1) * $(obj).data("numrowperpage");
-         endrow = $(obj).data("tablepage") * $(obj).data("numrowperpage");
-    }
-            // create data content
+        } else {
+            startrow = $(obj).data("tablepage") == 1 ? 0 : ($(obj).data("tablepage") - 1) * $(obj).data("numrowperpage");
+            endrow = $(obj).data("tablepage") * $(obj).data("numrowperpage");
+        }
+        // create data content
 
         if (typeof (($(obj).data("tablearray")["tabcontent"][0])) !== 'undefined') {
 
@@ -186,11 +188,11 @@
         var tf = "";
 
         if (totalnumrows) {
-            tf += "<tfoot><tr><td colspan=\"" + numcol + "\"><div id=\"buttons\">" + codebtn + "</div></td></tr>\n<tr><td colspan=\"" + numcol + "\">Gesamtergebnisse: " + totalnumrows + "</td></tr>\n</tfoot>";
+            tf += "<tfoot><tr><td colspan=\"" + numcol + "\"><div id=\"buttons\">" + codebtn + "</div></td></tr>\n<tr><td colspan=\"" + numcol + "\">" + $(obj).data("totalresultmsg") + totalnumrows + "</td></tr>\n</tfoot>";
         } else {
-            tf += "<tfoot><tr><td colspan=\"" + numcol + "\">"+$(obj).data("emptymsg")+"</td></tr></tfoot>";
+            tf += "<tfoot><tr><td colspan=\"" + numcol + "\">" + $(obj).data("emptymsg") + "</td></tr></tfoot>";
         }
-console.time("concatenation");
+        console.time("concatenation");
 
         $(obj).html(hd + dt + tf);
         return;

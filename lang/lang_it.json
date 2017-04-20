@@ -19,7 +19,8 @@
             "direction_msg_2":"Esportazione da database a file csv",
             "need_db_table_select":"È necessario selezionare una tabella MySql!",
             "need_csv_upload":"É necessario caricare il file CSV!",
-            "emptymsg": "La tabella è vuota!"
+            "emptymsg": "La tabella è vuota!",
+            "totalresultmsg": "Totale righe:"
         },
         "error":{
             "login_failed":"Accesso negato!",
@@ -52,6 +53,7 @@
             "reset": "Reset configurazione",
             "logout": "Logout",
             "import": "Importa",
-            "export": "Esporta"
+            "export": "Esporta",
+            "errorfile": "Mostrare file errori"
         }
 }
