@@ -30,9 +30,6 @@ $(document).ready(function () {
     var csvtabledata = null;
     var select_html_db = null; //html-code selectbox config assoc.
 
-    var alert_msg_1 = lang_text["msg"]["alert_msg_1"];
-    var alert_msg_2 = lang_text["msg"]["alert_msg_2"];
-
     var direction_msg_1 = lang_text["msg"]["direction_msg_1"];
     var direction_msg_2 = lang_text["msg"]["direction_msg_2"];
 
@@ -43,7 +40,7 @@ $(document).ready(function () {
 
     JQUERY4U.sendToServer("init.php"); //reset all settings parameters saved in session 
 
-    /////////////EVENTS HANDLE//////////////////////////
+    /////////////EV HANDLE//////////////////////////
 
     //It does everything as it was immediately after login
     $("#reinit-btn").click(function () {
@@ -340,7 +337,7 @@ $(document).ready(function () {
 
         if (get_direction() == "csvtodb") {   //csvtodb
 
-            html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_1 + "<img src=\"../css/info.png\" title=\"" + alert_msg_1 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
+            html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_1 + "<img src=\"../css/info.png\" title=\"" + lang_text["info"]["info_inport"] + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
             html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"import-btn\">" + lang_text["button"]["import"] + "</button></td></tr></tfoot>";
 
 
@@ -350,7 +347,7 @@ $(document).ready(function () {
 
         } else {  //dbtocsv
 
-            html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_2 + "<img src=\"../css/info.png\" title=\"" + alert_msg_2 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
+            html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + lang_text["info"]["info_export"] + "<img src=\"../css/info.png\" title=\"" + alert_msg_2 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
             html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"export-btn\">" + lang_text["button"]["export"] + "</button>\n</tr></td></tfoot>";
 
             for (var i = 0; i < dbtabledata["tabheader"].length; i++) {  //db column
@@ -394,7 +391,7 @@ $(document).ready(function () {
             $(".csvconf").removeAttr('disabled');
 
             if ($("#select-mysql-table").val() == "") {
-                show_msg("Es ist notwendig, um eine DB-Table wählen!");
+                show_msg(need_db_table_select);
             } else {
                 show_db_preview();
                 show_config_table();

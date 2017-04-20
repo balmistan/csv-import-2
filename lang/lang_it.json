@@ -13,8 +13,6 @@
 	},
         "msg": {
             "write_denied": "-Attenzione! Il programma non ha permessi di scrittura sulla cartella: ",
-            "alert_msg_1": "Wählen Sie die entsprechenden Spalten der Datenbanktabelle!",
-            "alert_msg_2": "Wählen Sie die Spalten der Datenbanktabelle exportiert werden und zeigen neben dem Namen, den Sie die csv zuordnen möchten!",
             "direction_msg_1":"Importazione da csv a tabella MySql",
             "direction_msg_2":"Esportazione da database a file csv",
             "need_db_table_select":"È necessario selezionare una tabella MySql!",
@@ -46,8 +44,11 @@
         "info": {
             "trash": "Svuota l' intera tabella MySql",
             "info_1": "Nel CSV la prima riga deve essere sempre il nome della colonna.",
-            "info_2": "Il Charset è sempre riferito al csv. Il database è sempre considerato UTF-8"
-        },
+            "info_2": "Il Charset è sempre riferito al csv. Il database è sempre considerato UTF-8",
+            "info_inport": "Selezionare la corrispondenza tra i nomi delle colonne CSV e quelle MySql",
+            "info_export": "Selezionare le colonne della tabella del database da esportare e indicare il nome che si desidera assegnare alle colonne csv!"
+       
+    },
         "button": {
             "upload": "Selezionare il file da caricare",
             "reset": "Reset configurazione",

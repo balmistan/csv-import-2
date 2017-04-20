@@ -13,8 +13,6 @@
 	},
         "msg": {
             "write_denied": "-Achtung! Das Programm hat keine Schreibrechte für den Ordner: ",
-            "alert_msg_1": "Wählen Sie die entsprechenden Spalten der Datenbanktabelle!",
-            "alert_msg_2": "Wählen Sie die Spalten der Datenbanktabelle exportiert werden und zeigen neben dem Namen, den Sie die csv zuordnen möchten!",
             "direction_msg_1":"Import von CSV in die Datenbank",
             "direction_msg_2":"Export von Datenbank in die CSV-Datei",
             "need_db_table_select":"Es ist notwendig, um eine DB-Table wählen!",
@@ -46,7 +44,9 @@
         "info": {
             "trash": "leert gesamte Datenbanktabelle",
             "info_1": "Die erste Zeile der CSV sollte immer die Namen der Spalten enthalten",
-            "info_2": "Charset bezieht sich immer auf csv. Datenbank muss immer Charset UTF-8"
+            "info_2": "Charset bezieht sich immer auf csv. Datenbank muss immer Charset UTF-8",
+            "info_inport": "Wählen Sie die entsprechenden Spalten der Datenbanktabelle!",
+            "info_export": "Wählen Sie die Spalten der Datenbanktabelle exportiert werden und zeigen neben dem Namen, den Sie die csv zuordnen möchten!"
         }, 
         "button": {
             "upload": "Wälen Sie der CSV-Dateiname zu laden",
