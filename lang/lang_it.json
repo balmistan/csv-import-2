@@ -56,5 +56,8 @@
             "import": "Importa",
             "export": "Esporta",
             "errorfile": "Mostrare file errori"
+        },
+        "alerts": {
+            "changelanguage" : "Attenzione! Il cambio lingua ricarica la pagina e vengono perse le impostazioni. Procedere?"
         }
 }

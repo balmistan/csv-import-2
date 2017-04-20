@@ -99,7 +99,14 @@ function maxsizeupload_bytes() {
         <div id="wrapper">
 
             <div id="content">
-                <?php echo"<input type=\"button\" onclick=\"window.location = '?lang=it';\" value=\"IT\" /><input type=\"button\" onclick=\"window.location = '?lang=de';\" value=\"DE\" />"; ?>
+                <?php 
+               
+                echo"<input type=\"button\" onclick=\"if(confirm('".$alerts["changelanguage"]."')){window.location = '?lang=it'};\" value=\"IT\" />"
+                . "<input type=\"button\" onclick=\"if(confirm('".$alerts["changelanguage"]."')){window.location = '?lang=de'};\" value=\"DE\" />";
+                
+                
+                
+                ?>
                 <fieldset>
                     <?php
                     echo "<legend>" . $legend["database_name"] . ": " . $_SESSION["dbname"] . "</legend>";

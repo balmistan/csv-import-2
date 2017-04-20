@@ -55,5 +55,8 @@
             "import": "Import",
             "export": "Export",
             "errorfile": "Fehler-Datei schauen"
+        },
+        "alerts": {
+            "changelanguage" : "Achtung! Mit Sprache ändern sich die Einstellungen verlieren. Weiter?"
         }
 }

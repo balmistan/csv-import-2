@@ -25,3 +25,4 @@ $error = $ltext["error"];
 $legend = $ltext["legend"];
 $option_select = $ltext["option_select"];
 $info = $ltext["info"];
+$alerts = $ltext["alerts"];
