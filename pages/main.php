@@ -50,6 +50,17 @@ $arr_table_names = $db->getTableNames();
 
 function maxsizeupload_bytes() {
     $val = trim(ini_get('upload_max_filesize'));
+    $max_upload_size = convert_in_byte($val);
+    
+    $val = trim(ini_get('post_max_size'));
+    
+    $max_post_data_size = convert_in_byte($val);
+    
+    return min(array($max_upload_size, $max_post_data_size));
+    
+}
+
+function convert_in_byte($val){
     $last = strtolower($val[strlen($val)-1]);
     switch($last) {
         // The 'G' modifier is available since PHP 5.1.0
@@ -132,7 +143,7 @@ function maxsizeupload_bytes() {
 
 
                 <div id="upload-download-block">
-<!--
+<!-- -->
                     <div id="div_radio_btn">
                         <?php
                         if ($dir == "dbtocsv") {
@@ -159,7 +170,7 @@ function maxsizeupload_bytes() {
                         }
                         ?>
                     </div>
--->
+<!-- -->
                     <div id="fileuploader" class="csvtodb"></div> 
                     <?php
                     echo "<p id=\"uploaded-file-name\" class=\"csvtodb\">" . $legend["uploaded"] . "&nbsp;<span><?php echo $fnup; ?></span></p>

@@ -2,8 +2,8 @@
 #AddDefaultCharset UTF-8
 AddCharset UTF-8 .html
 
-php_value post_max_size 150M
-php_value upload_max_filesize 150M
+php_value post_max_size 2M
+php_value upload_max_filesize 5M
 php_value memory_limit 1024M
 php_value max_execution_time 180
 

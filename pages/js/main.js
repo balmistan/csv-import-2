@@ -8,7 +8,8 @@ $(document).ready(function () {
 
     resetfunc(); //delete SESSION parameters
 
-    var lang_text = Array();
+//I read the language setted in main.php and load the corresponding json file.
+    var lang_text = Array(); 
 
     $.ajax({
         dataType: "json",
@@ -19,16 +20,13 @@ $(document).ready(function () {
             //alert(JSON.stringify(lang_text));
 
         }
-    });
-
-
-    //alert(JSON.stringify(lang_text));
+    });//close $.ajax
 
 
 //INIT
-    var dbtabledata = null;
-    var csvtabledata = null;
-    var select_html_db = null; //html-code selectbox config assoc.
+    var dbtabledata = null; //object for MySql-preview-table
+    var csvtabledata = null; //object for csv-preview-table
+    var select_html_db = null; //html-code to create selectbox config assoc (Described below).
 
     var direction_msg_1 = lang_text["msg"]["direction_msg_1"];
     var direction_msg_2 = lang_text["msg"]["direction_msg_2"];
@@ -162,7 +160,7 @@ $(document).ready(function () {
                 alert("Fehler!");
             }
         } else {
-            alert(alert_msg_2)
+            alert(lang_text["info"]["info_export"]);
         }
     });
 
@@ -337,7 +335,7 @@ $(document).ready(function () {
 
         if (get_direction() == "csvtodb") {   //csvtodb
 
-            html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + direction_msg_1 + "<img src=\"../css/info.png\" title=\"" + lang_text["info"]["info_inport"] + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
+            html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + lang_text["msg"]["direction_msg_1"] + "<img src=\"../css/info.png\" title=\"" + lang_text["info"]["info_inport"] + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
             html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"import-btn\">" + lang_text["button"]["import"] + "</button></td></tr></tfoot>";
 
 
@@ -347,7 +345,7 @@ $(document).ready(function () {
 
         } else {  //dbtocsv
 
-            html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + lang_text["info"]["info_export"] + "<img src=\"../css/info.png\" title=\"" + alert_msg_2 + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
+            html_header = "<thead><tr><td colspan=3 id=\"direction-title\">" + lang_text["info"]["info_export"] + "<img src=\"../css/info.png\" title=\"" + lang_text["info"]["info_export"] + "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\"></td></thead><tbody>";
             html_footer = "</tbody>\n<tfoot><tr><td colspan=3><button id=\"export-btn\">" + lang_text["button"]["export"] + "</button>\n</tr></td></tfoot>";
 
             for (var i = 0; i < dbtabledata["tabheader"].length; i++) {  //db column
@@ -412,6 +410,7 @@ $(document).ready(function () {
         showDownload: false,
         showProgress: true,
         multiple: false,
+        //showError:false,
         acceptFiles: "text/csv, application/zip",
         uploadStr: lang_text["button"]["upload"],
         onSubmit: function (files)
@@ -426,6 +425,7 @@ $(document).ready(function () {
             show_csv_preview();
             show_config_table();
             $("#wait-icon").hide();
+            alert("")
         },
         onError: function (files, status, errMsg, pd)
         {
@@ -437,8 +437,8 @@ $(document).ready(function () {
 
     function get_direction() {
         // return "dbtocsv" or "csvtodb"
-        //return $("input[name='radio_inp_exp']:checked").val();
-        return "csvtodb";                                         //always return csvtodb. implemented now only export function
+        return $("input[name='radio_inp_exp']:checked").val();
+ //       return "csvtodb";                                         //always return csvtodb. implemented now only export function
     }
 //////////////////////////////////////////////////////////////
 
