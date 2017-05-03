@@ -143,7 +143,7 @@ function convert_in_byte($val){
 
 
                 <div id="upload-download-block">
-<!-- -->
+<!-- 
                     <div id="div_radio_btn">
                         <?php
                         if ($dir == "dbtocsv") {
@@ -170,7 +170,7 @@ function convert_in_byte($val){
                         }
                         ?>
                     </div>
-<!-- -->
+-->
                     <div id="fileuploader" class="csvtodb"></div> 
                     <?php
                     echo "<p id=\"uploaded-file-name\" class=\"csvtodb\">" . $legend["uploaded"] . "&nbsp;<span><?php echo $fnup; ?></span></p>

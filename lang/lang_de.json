@@ -7,7 +7,7 @@
 		"password": "Passwort",
 		"loginbtn": "Zugriff",
                 "autosetting": "Autokonfiguration",
-                "separator": "Spaltentrenn:",
+                "separator": "Spaltentrennzeichen:",
                 "enclosure": "Kapselung Text:",
                 "charset": "CSV-Zeichensatz:"
 	},
@@ -28,10 +28,10 @@
             "database_name": "Datenbank",
             "preview_table": "Tabelle Vorschau:",
             "uploaded": "Hochgeladen:",
-            "csv_settings": "Konfigurations csv"
+            "csv_settings": "CSV-Konfiguration"
         },
         "option_select": {
-            "select_table" : "Wählen Sie die MySql-Tabelle auf die Sie Daten importieren möchten",
+            "select_table" : "Wählen Sie eine MySql-Tabelle",
             "semicolon": "SEMIKOLON",
             "comma": "KOMMA",
             "dot": "PUNKT",
@@ -49,8 +49,8 @@
             "info_export": "Wählen Sie die Spalten der Datenbanktabelle exportiert werden und zeigen neben dem Namen, den Sie die csv zuordnen möchten!"
         }, 
         "button": {
-            "upload": "Wälen Sie der CSV-Dateiname zu laden",
-            "reset": "Reset-Einstallungen",
+            "upload": "Wälen Sie eine CSV-Datei",
+            "reset": "Reset-Einstellungen",
             "logout": "Beenden",
             "import": "Import",
             "export": "Export",
