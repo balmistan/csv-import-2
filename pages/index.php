@@ -83,7 +83,7 @@ if ($err_msg != "") {
 }
 echo "
             <fieldset class=\"boxBody\">
-                <button type=\"button\" onclick=\"window.location = '?lang=it';\">IT</button><button type=\"button\" onclick=\"window.location = '?lang=de';\">DE</button>
+                <input type=\"button\" onclick=\"window.location = '?lang=it';\" value=\"IT\" \><input type=\"button\" onclick=\"window.location = '?lang=de';\" value=\"DE\" \>
                 <label for=\"dbname\">" . $label['dbname'] . "</label>
                 <input type=\"text\" name=\"dbname\" id=\"dbname\"/>
                 <label for=\"server\">" . $label['server'] . "</label>

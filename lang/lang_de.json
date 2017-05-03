@@ -31,7 +31,7 @@
             "csv_settings": "Konfigurations csv"
         },
         "option_select": {
-            "select_table" : "Wählen Sie die Tabelle",
+            "select_table" : "Wählen Sie die MySql-Tabelle auf die Sie Daten importieren möchten",
             "semicolon": "SEMIKOLON",
             "comma": "KOMMA",
             "dot": "PUNKT",

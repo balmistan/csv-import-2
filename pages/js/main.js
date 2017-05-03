@@ -360,8 +360,9 @@ $(document).ready(function () {
 
     }
 
-
+//checkbtntest handle events on function change import/export or export/import
     function checkbtntest() { // if radiobtn change
+        
         if (get_direction() === "csvtodb") { //inport in db  
             $(".csvtodb").show();
             $(".dbtocsv").hide();
