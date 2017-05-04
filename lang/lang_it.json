@@ -31,7 +31,7 @@
             "csv_settings": "Configurazione csv"
         },
         "option_select": {
-            "select_table" : "Selezionare una tabella",
+            "select_table" : "Selezionare la tabella MySql sulla quale si desidera importare",
             "semicolon": "PUNTO E VIRGOLA",
             "comma": "VIRGOLA",
             "dot": "PUNTO",
@@ -50,7 +50,7 @@
        
     },
         "button": {
-            "upload": "Selezionare il file da caricare",
+            "upload": "Selezionare il file CSV da importare",
             "reset": "Reset configurazione",
             "logout": "Logout",
             "import": "Importa",

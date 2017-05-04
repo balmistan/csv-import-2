@@ -31,7 +31,7 @@
             "csv_settings": "CSV-Konfiguration"
         },
         "option_select": {
-            "select_table" : "Wählen Sie eine MySql-Tabelle",
+            "select_table" : "Wählen Sie die MySql-Tabelle, die Sie importieren möchten",
             "semicolon": "SEMIKOLON",
             "comma": "KOMMA",
             "dot": "PUNKT",
@@ -49,7 +49,7 @@
             "info_export": "Wählen Sie die Spalten der Datenbanktabelle exportiert werden und zeigen neben dem Namen, den Sie die csv zuordnen möchten!"
         }, 
         "button": {
-            "upload": "Wälen Sie eine CSV-Datei",
+            "upload": "Wählen Sie die CSV-Datei, die importiert werden soll",
             "reset": "Reset-Einstellungen",
             "logout": "Beenden",
             "import": "Import",
