@@ -58,6 +58,7 @@
             "errorfile": "Mostrare file errori"
         },
         "alerts": {
-            "changelanguage" : "Attenzione! Il cambio lingua ricarica la pagina e vengono perse le impostazioni. Procedere?"
+            "changelanguage" : "Attenzione! Il cambio lingua ricarica la pagina e vengono perse le impostazioni. Procedere?",
+            "errorimportcheck": "Dati importati con errore. Per vedere il file errori cliccare sul pulsante \"Mostrare file errori\""
         }
 }

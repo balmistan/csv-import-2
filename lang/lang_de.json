@@ -57,6 +57,7 @@
             "errorfile": "Fehler-Datei schauen"
         },
         "alerts": {
-            "changelanguage" : "Achtung! Mit Sprache ändern sich die Einstellungen verlieren. Weiter?"
+            "changelanguage" : "Achtung! Mit Sprache ändern sich die Einstellungen verlieren. Weiter?",
+            "errorimportcheck": "Gespacherte Daten falsch. Um die Fehler in der Datei einzusehen, klicken Sie auf den Button Fehler-Datei"
         }
 }
