@@ -22,6 +22,8 @@ $enclosure_list = array(
 );
 */
 
+
+
 $separator_list = array(
     "semicolon" => array($option_select["semicolon"], ";"),
     "comma" => array($option_select["comma"], ","),

@@ -4,6 +4,7 @@ session_start();
 
 require_once "../class/db.class.php";
 require_once "../class/csv.class.php";
+require_once 'language_read.php';
 require_once "separator_list.php";
 require_once 'debug.php';
 

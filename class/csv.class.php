@@ -30,7 +30,7 @@ class csv {
         $this->UseLimit = ($limit=="") ? 0 : 1;
         $this->Start = intval($start);
     }
-
+//if $getnumrows = true, this function return also the total number of row in table.
     private function setArrCSV($getnumrows) {
         
         $rowcount = 0;

@@ -27,7 +27,7 @@ $csv = new csv("../uploads/" . $_SESSION["info"]["fnup"], //csv file link
         $separator_list[$_SESSION["info"]["sep"]][1], $enclosure_list[$_SESSION["info"]["encl"]][1], $_SESSION["info"]["chset"]
 );
 
-$arr_csv = $csv->getArrCsv();
+$arr_csv = $csv->getArrCsv(false);
 
 
 
