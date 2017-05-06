@@ -51,18 +51,17 @@ $arr_table_names = $db->getTableNames();
 function maxsizeupload_bytes() {
     $val = trim(ini_get('upload_max_filesize'));
     $max_upload_size = convert_in_byte($val);
-    
+
     $val = trim(ini_get('post_max_size'));
-    
+
     $max_post_data_size = convert_in_byte($val);
-    
+
     return min(array($max_upload_size, $max_post_data_size));
-    
 }
 
-function convert_in_byte($val){
-    $last = strtolower($val[strlen($val)-1]);
-    switch($last) {
+function convert_in_byte($val) {
+    $last = strtolower($val[strlen($val) - 1]);
+    switch ($last) {
         // The 'G' modifier is available since PHP 5.1.0
         case 'g':
             $val *= 1024;
@@ -110,45 +109,41 @@ function convert_in_byte($val){
         <div id="wrapper">
 
             <div id="content">
-                <?php 
-               
-                echo"<input type=\"button\" onclick=\"if(confirm('".$alerts["changelanguage"]."')){window.location = '?lang=it'};\" value=\"IT\" />"
-                . "<input type=\"button\" onclick=\"if(confirm('".$alerts["changelanguage"]."')){window.location = '?lang=de'};\" value=\"DE\" />";
-                
-                
-                
+                <?php
+                echo"<input type=\"button\" onclick=\"if(confirm('" . $alerts["changelanguage"] . "')){window.location = '?lang=it'};\" value=\"IT\" />"
+                . "<input type=\"button\" onclick=\"if(confirm('" . $alerts["changelanguage"] . "')){window.location = '?lang=de'};\" value=\"DE\" />";
                 ?>
                 <fieldset>
-                    <?php
-                    echo "<legend>" . $legend["database_name"] . ": " . $_SESSION["dbname"] . "</legend>";
-                    ?>
+                <?php
+                echo "<legend>" . $legend["database_name"] . ": " . $_SESSION["dbname"] . "</legend>";
+                ?>
                     <select id="select-mysql-table">
-                        <?php
-                        echo "<option data-id=\"0\" value = \"\" >" . $option_select["select_table"] . "</option>";
-
-                        for ($i = 1; $i <= count($arr_table_names); $i++) {
-                            if ($i == $optid) {
-                                echo "<option data-id=\"" . $i . "\" value=\"" . $arr_table_names[$i - 1] . "\" selected=\"selected\">" . $arr_table_names[$i - 1] . "</option>\n";
-                            } else {
-                                echo "<option data-id=\"" . $i . "\" value=\"" . $arr_table_names[$i - 1] . "\">" . $arr_table_names[$i - 1] . "</option>\n";
-                            }
-                        }
-                        ?>
-                    </select> 
                     <?php
-                    echo "<img src=\"../css/garbage.png\" alt=\"truncate table\" title=\"" . $info["trash"] . "\" id=\"garbage\" />";
+                    echo "<option data-id=\"0\" value = \"\" >" . $option_select["select_table"] . "</option>";
+
+                    for ($i = 1; $i <= count($arr_table_names); $i++) {
+                        if ($i == $optid) {
+                            echo "<option data-id=\"" . $i . "\" value=\"" . $arr_table_names[$i - 1] . "\" selected=\"selected\">" . $arr_table_names[$i - 1] . "</option>\n";
+                        } else {
+                            echo "<option data-id=\"" . $i . "\" value=\"" . $arr_table_names[$i - 1] . "\">" . $arr_table_names[$i - 1] . "</option>\n";
+                        }
+                    }
                     ?>
+                    </select> 
+                        <?php
+                        echo "<img src=\"../css/garbage.png\" alt=\"truncate table\" title=\"" . $info["trash"] . "\" id=\"garbage\" />";
+                        ?>
                 </fieldset>
 
 
 
                 <div id="upload-download-block">
- 
-                    <div id="div_radio_btn">
-                        <?php
-                        if ($dir == "dbtocsv") {
 
-                            echo"<label for=\"csv_db\">
+                    <div id="div_radio_btn">
+<?php
+if ($dir == "dbtocsv") {
+
+    echo"<label for=\"csv_db\">
                             <input type=\"radio\" id=\"csv_db\" name=\"radio_inp_exp\" value=\"csvtodb\">CSV --- > DB
                                 <img src=\"../css/info.png\" title=\"" . $info["info_1"] . "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\" />
                         </label>
@@ -157,8 +152,8 @@ function convert_in_byte($val){
                         <label for=\"db_csv\">
                             <input type=\"radio\" id=\"db_csv\" checked=\"checked\" name=\"radio_inp_exp\" value=\"dbtocsv\">DB --- > CSV
                         </label>";
-                        } else {
-                            echo"<label for=\"csv_db\">
+} else {
+    echo"<label for=\"csv_db\">
                             <input type=\"radio\" id=\"csv_db\" checked=\"checked\" name=\"radio_inp_exp\"  value=\"csvtodb\">CSV --- > DB
                                 <img src=\"../css/info.png\" title=\"" . $info["info_1"] . "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\" />
                         </label>
@@ -167,39 +162,39 @@ function convert_in_byte($val){
                         <label for=\"db_csv\">
                             <input type=\"radio\" id=\"db_csv\" name=\"radio_inp_exp\" value=\"dbtocsv\">DB --- > CSV
                         </label>";
-                        }
-                        ?>
+}
+?>
                     </div>
 
                     <div id="fileuploader" class="csvtodb"></div> 
-                    <?php
-                    echo "<p id=\"uploaded-file-name\" class=\"csvtodb\">" . $legend["uploaded"] . "&nbsp;<span><?php echo $fnup; ?></span></p>
+                        <?php
+                        echo "<p id=\"uploaded-file-name\" class=\"csvtodb\">" . $legend["uploaded"] . "&nbsp;<span><?php echo $fnup; ?></span></p>
                    
                         <fieldset>
                         <legend>" . $legend["csv_settings"] . "</legend>
 
                         <label for=\"autoconf\">";
 
-                    if ($autoconf) {
-                        echo "<input type=\"checkbox\" name=\"autoconf\" id=\"autoconf\" checked=\"checked\" />" . $label["autosetting"] . "</label>";
-                    } else {
-                        echo "<input type=\"checkbox\" name=\"autoconf\" id=\"autoconf\" />" . $label["autosetting"] . "</label>";
-                    }
+                        if ($autoconf) {
+                            echo "<input type=\"checkbox\" name=\"autoconf\" id=\"autoconf\" checked=\"checked\" />" . $label["autosetting"] . "</label>";
+                        } else {
+                            echo "<input type=\"checkbox\" name=\"autoconf\" id=\"autoconf\" />" . $label["autosetting"] . "</label>";
+                        }
 
 
-                    echo"<label for=\"separator\">" . $label["separator"] . "</label>
+                        echo"<label for=\"separator\">" . $label["separator"] . "</label>
 
                     <select name=\"separator\" id=\"separator\" class=\"csvconf\" disabled=\"disabled\">";
 
 
-                    foreach ($separator_list as $key => $value) {
-                        if ($key == $sep) {
-                            echo "<option selected=\"selected\" value=\"" . $key . "\">" . $value[0] . "</option>\n";
-                        } else {
-                            echo "<option value=\"" . $key . "\">" . $value[0] . "</option>\n";
+                        foreach ($separator_list as $key => $value) {
+                            if ($key == $sep) {
+                                echo "<option selected=\"selected\" value=\"" . $key . "\">" . $value[0] . "</option>\n";
+                            } else {
+                                echo "<option value=\"" . $key . "\">" . $value[0] . "</option>\n";
+                            }
                         }
-                    }
-                    ?>
+                        ?>
 
                     </select>
                     <?php
@@ -228,30 +223,32 @@ function convert_in_byte($val){
                     }
 
                     echo"</select>
-                    <img src=\"../css/info.png\" title=\"".$info["info_2"]."\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\" />
+                    <img src=\"../css/info.png\" title=\"" . $info["info_2"] . "\" alt=\"info\" class=\"info-icon\" onclick=\"alert(this.getAttribute('title'))\" />
                     </span>
                     <p></p>
-                    <span class=\"label dbtocsv\">".$label["charset"]." UTF-8</span>
+                    <span class=\"label dbtocsv\">" . $label["charset"] . " UTF-8</span>
                     </fieldset>";
                     ?>
 
                 </div>
-                <?php
-                echo"<button id=\"reinit-btn\">" . $button["reset"] . "</button>
+                    <?php
+                    echo"<button id=\"reinit-btn\">" . $button["reset"] . "</button>
                 <button id=\"logout-btn\" onclick=\"window.location.href = 'logout.php?lang=" . $language . "'\">" . $button["logout"] . "</button>";
-                ?>
+
+                    echo "<button id=\"show_diff_file\">" . $button["errorfile"] . "</button>";
+                    ?>
             </div>
 
             <div id="sidebar-wrapper">
 
                 <span id="table-title" class="table-title">
                     <fieldset>
-                        <?php
-                        echo "<legend>" . $legend["preview_table"] . "</legend>";
+<?php
+echo "<legend>" . $legend["preview_table"] . "</legend>";
 
 
-                      
-                            echo"
+
+echo"
                             <label for=\"prevcsv\"> 
                                 <input type=\"radio\" id=\"prevcsv\" class=\"csvtodb\" name=\"radiopreview\" value=\"csv\" ><span class=\"csvtodb\">CSV-Datei</span>
                             </label>
@@ -259,7 +256,7 @@ function convert_in_byte($val){
                                 <input type=\"radio\" id=\"prevdb\" name=\"radiopreview\" value=\"db\" checked=\"checked\" >MySql-Table
                       </label>
 ";
-                        ?>
+?>
 
                 </span>
 
@@ -290,18 +287,16 @@ function convert_in_byte($val){
                 </div>
 
             </div>
-            <?php 
-            echo "<button id=\"show_diff_file\">".$button["errorfile"]."</button>";
-            ?>
-           <!-- <div id="debug-div"></div> -->
+
+            <!-- <div id="debug-div"></div> -->
         </div>
 
         <div id="dialog" title="Basic dialog">
             <!--<p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p> -->
         </div>
-        <?php
-        echo "<input type=\"hidden\" id=\"language\" value=\"" . $language . "\" />";
-        echo "<input type=\"hidden\" id=\"max_upload_size\" value=\"" . maxsizeupload_bytes() . "\" />";
-        ?>
+<?php
+echo "<input type=\"hidden\" id=\"language\" value=\"" . $language . "\" />";
+echo "<input type=\"hidden\" id=\"max_upload_size\" value=\"" . maxsizeupload_bytes() . "\" />";
+?>
     </body>
 </html>
