@@ -225,6 +225,6 @@ body{
 
 input[type="button"],
 input[type="submit"]{
-    color:gray !important;
+    color:grey !important;
     font-weight: bold;
 }

@@ -52,12 +52,17 @@
             "upload": "Wählen Sie die CSV-Datei, die importiert werden soll",
             "reset": "Reset-Einstellungen",
             "logout": "Beenden",
-            "import": "Import",
             "export": "Export",
             "errorfile": "Fehler-Datei schauen"
         },
         "alerts": {
             "changelanguage" : "Achtung! Mit Sprache ändern sich die Einstellungen verlieren. Weiter?",
-            "errorimportcheck": "Gespacherte Daten falsch. Um die Fehler in der Datei einzusehen, klicken Sie auf den Button Fehler-Datei"
+            "errorimportcheck": "Gespacherte Daten falsch. Um die Fehler in der Datei einzusehen, klicken Sie auf den Button Fehler-Datei",
+            "nomysqltableselected":"Keine Datenbanktabelle ausgewählten!",
+            "msgerruploadpartial_1":"Diese Dateigröße ist nicht erlaubt!",
+            "msgerruploadpartial_2":"Modifizieren Sie 'upload_max_filesize' und 'post_max_size' in der .htaccess-Datei",
+            "msgerruploadpartial_3":"oder versuchen Sie im Zip-Format hochzuladen",
+            "nomysqltableselected":"Keine Datenbanktabelle ausgewählten!",
+            "truncatetablecautionmsg":"Die ausgewähltene MySql-Tabelle wird entleert! Vorgehen?"
         }
 }

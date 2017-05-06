@@ -9,7 +9,7 @@ $(document).ready(function () {
     resetfunc(); //delete SESSION parameters
 
 //I read the language setted in main.php and load the corresponding json file.
-    var lang_text = Array(); 
+    var lang_text = Array();
 
     $.ajax({
         dataType: "json",
@@ -17,8 +17,6 @@ $(document).ready(function () {
         async: false,
         success: function (data) {
             lang_text = data;
-            //alert(JSON.stringify(lang_text));
-
         }
     });//close $.ajax
 
@@ -101,8 +99,8 @@ $(document).ready(function () {
 
     $("#garbage").click(function () {
         if ($("#select-mysql-table").val() == "") {
-            alert("Keine Datenbanktabelle ausgew&auml;hlten!");
-        } else if (confirm("Die Datenbanktabelle: " + $("#select-mysql-table").val() + " wird entleert! Vorgehen?")) {
+            alert(lang_text["alerts"]["nomysqltableselected"]);
+        } else if (confirm(lang_text["alerts"]["truncatetablecautionmsg"])) {
             $.post("deleteondb.php", {"tablename": $("#select-mysql-table").val()}, function (data, status) {
                 //alert("Data: " + data + "\nStatus: " + status);
                 dbtabledata = null;
@@ -362,7 +360,7 @@ $(document).ready(function () {
 
 //checkbtntest handle events on function change import/export or export/import
     function checkbtntest() { // if radiobtn change
-        
+
         if (get_direction() === "csvtodb") { //inport in db  
             $(".csvtodb").show();
             $(".dbtocsv").hide();
@@ -414,6 +412,29 @@ $(document).ready(function () {
         //showError:false,
         acceptFiles: "text/csv, application/zip",
         uploadStr: lang_text["button"]["upload"],
+        onSelect: function (files)
+        {
+            
+            var filename = files[0].name;
+            var extension = filename.slice(-3);
+            var maxsize = $("#max_upload_size").val();
+            var actualsize = files[0].size.toString();
+            var msgerruploadpartial_1 = lang_text["alerts"]["msgerruploadpartial_1"];
+            var msgerruploadpartial_2 = lang_text["alerts"]["msgerruploadpartial_2"];
+            var msgerruploadpartial_3 = lang_text["alerts"]["msgerruploadpartial_3"];
+            if(maxsize.localeCompare(actualsize) < 0){
+                if(extension.toLowerCase() == "zip"){
+                   alert(msgerruploadpartial_1 + " " + msgerruploadpartial_2) 
+                }else{
+                    alert(msgerruploadpartial_1 + " " + msgerruploadpartial_2+ " " + msgerruploadpartial_3);
+                }
+                return false;
+            }
+            
+            //alert($("#max_upload_size").val())
+            //return confirm(files[0].size)
+            //return true; //to allow file submission.
+        },
         onSubmit: function (files)
         {
             $("#wait-icon").show();
@@ -426,7 +447,6 @@ $(document).ready(function () {
             show_csv_preview();
             show_config_table();
             $("#wait-icon").hide();
-            alert("")
         },
         onError: function (files, status, errMsg, pd)
         {
@@ -439,7 +459,7 @@ $(document).ready(function () {
     function get_direction() {
         // return "dbtocsv" or "csvtodb"
         return $("input[name='radio_inp_exp']:checked").val();
- //       return "csvtodb";                                         //always return csvtodb. implemented now only export function
+        //       return "csvtodb";                                         //always return csvtodb. implemented now only export function
     }
 //////////////////////////////////////////////////////////////
 

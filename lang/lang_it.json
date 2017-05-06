@@ -59,6 +59,12 @@
         },
         "alerts": {
             "changelanguage" : "Attenzione! Il cambio lingua ricarica la pagina e vengono perse le impostazioni. Procedere?",
-            "errorimportcheck": "Dati importati con errore. Per vedere il file errori cliccare sul pulsante \"Mostrare file errori\""
+            "errorimportcheck": "Dati importati con errore. Per vedere il file errori cliccare sul pulsante \"Mostrare file errori\"",
+            "nomysqltableselected": "Nessuna tabella MySql selezionata",
+            "msgerruploadpartial_1":"Dimensioni file non permesse!",
+            "msgerruploadpartial_2":"Modificare 'upload_max_filesize' e 'post_max_size' nel file .htaccess",
+            "msgerruploadpartial_3":"oppure provare a comprimere il file in formato .zip prima di caricarlo",
+            "nomysqltableselected":"Nessuna tabella MySql selezionata!",
+            "truncatetablecautionmsg":"La tabella MySql selezionata verrà svuotata! Proseguire?"
         }
 }
