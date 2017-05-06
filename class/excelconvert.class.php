@@ -24,9 +24,13 @@ class excelconvert {
             die("The file " . $filein . " does not exist!");
 
         $this->ArrColumns = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
-            'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-            'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO',
-            'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ');
+            'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+//Combining the letters the array becomes 650 elements
+        for ($i = 0; $i < 25; $i++) {
+            for ($j = 0; $j < 25; $j++) {
+                array_push($this->ArrColumns, $this->ArrColumns[$i] . $this->ArrColumns[$j]);
+            }
+        }
 
         $this->row_start = 3;
         $this->col_start = 2;
@@ -53,8 +57,8 @@ class excelconvert {
         foreach ($arr_assoc as $key => $arr_value) {
             $objk->
                     //column names setting
-                    setCellValue($this->ArrColumns[$startcolumn_arr_index+(3*$arr_value["csvindex"])] . "2", $arr_value["dbcolumnname"])->
-                    setCellValue($this->ArrColumns[$startcolumn_arr_index +(3*$arr_value["csvindex"])+ 1] . "2", $arr_value["csvcolumnname"]);
+                    setCellValue($this->ArrColumns[$startcolumn_arr_index + (3 * $arr_value["csvindex"])] . "2", $arr_value["dbcolumnname"])->
+                    setCellValue($this->ArrColumns[$startcolumn_arr_index + (3 * $arr_value["csvindex"]) + 1] . "2", $arr_value["csvcolumnname"]);
         }
 
 
