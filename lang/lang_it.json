@@ -65,6 +65,12 @@
             "msgerruploadpartial_2":"Modificare 'upload_max_filesize' e 'post_max_size' nel file .htaccess",
             "msgerruploadpartial_3":"oppure provare a comprimere il file in formato .zip prima di caricarlo",
             "nomysqltableselected":"Nessuna tabella MySql selezionata!",
-            "truncatetablecautionmsg":"La tabella MySql selezionata verrà svuotata! Proseguire?"
+            "truncatetablecautionmsg":"La tabella MySql selezionata verrà svuotata! Proseguire?",
+            "writeindatabasecaution":"Attenzione! Scrittura su database. Proseguire?",
+            "answermsnocsvdata":"Nessun dato presente nel file CSV",
+            "success": "Operazione effettuata con successo!",
+             "dbmserror": "Errore! Il DBMS ha risposto col seguente messaggio:",
+             "importedwitherror":"Dati importati con errori. Per visualizzare il file errori cliccare sul pulsante: 'Visualizza file errori'!",
+             "error":"Errore!"
         }
 }

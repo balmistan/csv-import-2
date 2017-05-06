@@ -113,23 +113,23 @@ $(document).ready(function () {
         $("#show_diff_file").hide();
         var arr = getAssocCsvDb();
         if (arr["assoc"].length != 0) {
-            if (confirm("Achtung! Es wird in die Datenbank geschrieben werden. Vorgehen?")) {
+            if (confirm(lang_text["alerts"]["writeindatabasecaution"])) {
                 var issue = JQUERY4U.sendToServer("save_on_db.php?lang=" + $("#language").val(), JSON.stringify(arr));
 
                 var msg = "";
                 switch (issue[0]) {
                     case 0:
-                        msg = "keine data zu laden";
+                        msg = lang_text["alerts"]["answermsnocsvdata"];
                         break;
                     case 1:
-                        msg = "Erfolg!";
+                        msg = lang_text["alerts"]["success"];
                         show_db_preview();
                         break;
                     case 2:
-                        msg = "Fehler! Das DBMS antwortet mit der Nachricht: \"" + issue[1] + "\""; //msg from DBMS
+                        msg = lang_text["alerts"]["dbmserror"] +" \"" + issue[1] + "\""; //msg from DBMS
                         break;
                     case 3:
-                        msg = "Gespeicherte Daten falsch. beobachtete Fehlerdatei klicken auf den Button Fehler-Datei!";
+                        msg = lang_text["alerts"]["importedwitherror"];
                         $("#show_diff_file").show();
                         break;
                     default:
@@ -155,7 +155,7 @@ $(document).ready(function () {
             if (issue == "success") {
                 document.location = "wrapper.php";
             } else {
-                alert("Fehler!");
+                alert(lang_text["alerts"]["error"]);
             }
         } else {
             alert(lang_text["info"]["info_export"]);
