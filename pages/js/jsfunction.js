@@ -21,7 +21,7 @@ JQUERY4U = {
                 } catch (error) {
                     //alert(error.message)
                     // ret = null;
-                    alert("logout")
+                    //alert("logout")
                     location.href = '../index.php';
                 }
             },

@@ -52,6 +52,7 @@
             "upload": "Wählen Sie die CSV-Datei, die importiert werden soll",
             "reset": "Reset-Einstellungen",
             "logout": "Beenden",
+            "import": "Import",
             "export": "Export",
             "errorfile": "Fehler-Datei schauen"
         },
@@ -69,6 +70,7 @@
             "success": "Erfolg!",
             "dbmserror": "Fehler! Das DBMS antwortet mit der Nachricht:",
             "importedwitherror":"Gespeicherte Daten falsch. Beobachtete Fehlerdatei klicken auf den Button Fehler-Datei!",
-            "error":"Fehler!"
+            "error":"Fehler!",
+            "sessionexpired": "Sitzung abgelaufen!"
         }
 }

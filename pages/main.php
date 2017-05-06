@@ -250,22 +250,15 @@ function convert_in_byte($val){
                         echo "<legend>" . $legend["preview_table"] . "</legend>";
 
 
-                        if ($show == "csv") {
-
+                      
                             echo"
-                            
-<input type=\"radio\" id=\"prevcsv\" class=\"csvtodb\" name=\"radiopreview\" value=\"csv\" checked=\"checked\" ><span class=\"csvtodb\">CSV</span>
-
-                                <input type=\"radio\" id=\"prevdb\" name=\"radiopreview\" value=\"db\" >DB
-                       ";
-                        } else {
-                            echo"
-                           
-                                <input type=\"radio\" id=\"prevcsv\" class=\"csvtodb\" name=\"radiopreview\" value=\"csv\" ><span class=\"csvtodb\">CSV</span>
-                            
-                                <input type=\"radio\" id=\"prevdb\" name=\"radiopreview\" value=\"db\" checked=\"checked\" >DB
-                       ";
-                        }
+                            <label for=\"prevcsv\"> 
+                                <input type=\"radio\" id=\"prevcsv\" class=\"csvtodb\" name=\"radiopreview\" value=\"csv\" ><span class=\"csvtodb\">CSV-Datei</span>
+                            </label>
+                             <label for=\"prevdb\"> 
+                                <input type=\"radio\" id=\"prevdb\" name=\"radiopreview\" value=\"db\" checked=\"checked\" >MySql-Table
+                      </label>
+";
                         ?>
 
                 </span>
