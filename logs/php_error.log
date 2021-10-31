@@ -16864,3 +16864,53 @@
 [06-May-2017 16:41:27 Europe/Berlin] PHP Notice:  Undefined index: idComune in /var/www/html/NUOVI/csv-import-2/class/db.class.php on line 256
 [06-May-2017 16:41:27 Europe/Berlin] PHP Notice:  Undefined index: idComune in /var/www/html/NUOVI/csv-import-2/class/db.class.php on line 256
 [06-May-2017 16:41:27 Europe/Berlin] PHP Notice:  Undefined index: idComune in /var/www/html/NUOVI/csv-import-2/class/db.class.php on line 256
+[29-Oct-2021 14:46:13 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 14:46:13 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 15:37:20 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 15:37:20 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 16:53:24 Europe/Berlin] PHP Notice:  Undefined variable: arr_check in /var/www/html/csv-import-2/pages/save_on_db.php on line 41
+[29-Oct-2021 16:53:24 Europe/Berlin] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /var/www/html/csv-import-2/pages/save_on_db.php on line 41
+[29-Oct-2021 16:58:08 Europe/Berlin] PHP Notice:  Undefined variable: arr_check in /var/www/html/csv-import-2/pages/save_on_db.php on line 41
+[29-Oct-2021 16:58:08 Europe/Berlin] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /var/www/html/csv-import-2/pages/save_on_db.php on line 41
+[29-Oct-2021 17:00:51 Europe/Berlin] PHP Fatal error:  Allowed memory size of 31457280 bytes exhausted (tried to allocate 20480 bytes) in /var/www/html/csv-import-2/class/db.class.php on line 275
+[29-Oct-2021 17:08:24 Europe/Berlin] PHP Notice:  Undefined variable: arr_check in /var/www/html/csv-import-2/pages/save_on_db.php on line 41
+[29-Oct-2021 17:08:24 Europe/Berlin] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /var/www/html/csv-import-2/pages/save_on_db.php on line 41
+[29-Oct-2021 17:12:18 Europe/Berlin] PHP Notice:  Undefined variable: arr_check in /var/www/html/csv-import-2/pages/save_on_db.php on line 41
+[29-Oct-2021 17:12:18 Europe/Berlin] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /var/www/html/csv-import-2/pages/save_on_db.php on line 41
+[29-Oct-2021 17:12:55 Europe/Berlin] PHP Notice:  Undefined variable: arr_check in /var/www/html/csv-import-2/pages/save_on_db.php on line 41
+[29-Oct-2021 17:12:55 Europe/Berlin] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /var/www/html/csv-import-2/pages/save_on_db.php on line 41
+[29-Oct-2021 17:14:45 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 17:14:45 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 22:57:18 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 22:57:18 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Undefined index: info in /var/www/html/csv-import-2/pages/csvhandle.php on line 22
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Trying to access array offset on value of type null in /var/www/html/csv-import-2/pages/csvhandle.php on line 22
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Undefined index: info in /var/www/html/csv-import-2/pages/csvhandle.php on line 48
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Trying to access array offset on value of type null in /var/www/html/csv-import-2/pages/csvhandle.php on line 48
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Undefined index: info in /var/www/html/csv-import-2/pages/csvhandle.php on line 54
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Trying to access array offset on value of type null in /var/www/html/csv-import-2/pages/csvhandle.php on line 54
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Undefined index: info in /var/www/html/csv-import-2/pages/csvhandle.php on line 55
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Trying to access array offset on value of type null in /var/www/html/csv-import-2/pages/csvhandle.php on line 55
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Undefined index:  in /var/www/html/csv-import-2/pages/csvhandle.php on line 55
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Trying to access array offset on value of type null in /var/www/html/csv-import-2/pages/csvhandle.php on line 55
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Undefined index: info in /var/www/html/csv-import-2/pages/csvhandle.php on line 56
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Trying to access array offset on value of type null in /var/www/html/csv-import-2/pages/csvhandle.php on line 56
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Undefined index:  in /var/www/html/csv-import-2/pages/csvhandle.php on line 56
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Trying to access array offset on value of type null in /var/www/html/csv-import-2/pages/csvhandle.php on line 56
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Undefined index: info in /var/www/html/csv-import-2/pages/csvhandle.php on line 57
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Trying to access array offset on value of type null in /var/www/html/csv-import-2/pages/csvhandle.php on line 57
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Warning:  fgetcsv(): delimiter must be a character in /var/www/html/csv-import-2/class/csv.class.php on line 42
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Warning:  Invalid argument supplied for foreach() in /var/www/html/csv-import-2/class/csv.class.php on line 44
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Warning:  fgetcsv(): delimiter must be a character in /var/www/html/csv-import-2/class/csv.class.php on line 48
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Undefined index: info in /var/www/html/csv-import-2/pages/csvhandle.php on line 69
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Trying to access array offset on value of type null in /var/www/html/csv-import-2/pages/csvhandle.php on line 69
+[29-Oct-2021 22:57:54 Europe/Berlin] PHP Notice:  Undefined index: info in /var/www/html/csv-import-2/pages/csvhandle.php on line 76
+[29-Oct-2021 23:02:58 Europe/Berlin] PHP Fatal error:  Allowed memory size of 31457280 bytes exhausted (tried to allocate 266240 bytes) in /var/www/html/csv-import-2/class/db.class.php on line 279
+[29-Oct-2021 23:03:10 Europe/Berlin] PHP Notice:  Undefined variable: arr_check in /var/www/html/csv-import-2/pages/save_on_db.php on line 41
+[29-Oct-2021 23:03:10 Europe/Berlin] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /var/www/html/csv-import-2/pages/save_on_db.php on line 41
+[29-Oct-2021 23:05:43 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 23:05:43 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 23:05:48 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 23:05:48 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 23:17:20 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
+[29-Oct-2021 23:17:20 Europe/Berlin] PHP Notice:  A non well formed numeric value encountered in /var/www/html/csv-import-2/pages/main.php on line 69
